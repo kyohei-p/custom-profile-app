@@ -1,0 +1,21 @@
+<div class="main-container" style="margin: 50px;">
+  <div class="flex-container" style="display: flex; justify-content: center; margin: 50px 0;">
+    <div class="image-container" style="flex: 1; text-align: center;">
+      <p>ここにアバター画像を置きます</p>
+    </div>
+    <div class="intro-container" style="flex: 1; text-align: center;">
+      <h2>自己紹介</h2>
+      <p>自分の自己紹介文が入ります。</p>
+      <div class="actions">
+        <%= button_to "自己紹介を編集する", data: { turbolinks: false } %>
+      </div>
+    </div>
+  </div>
+  <div class="skills-container" style="text-align: center;">
+    <h2 style="text-decoration: underline;">スキルチャート</h2>
+    <div class="actions">
+      <%= button_to "スキルを編集する", data: { turbolinks: false } %>
+    </div>
+    <p>ここに棒グラフを置きます</p>
+  </div>
+</div>

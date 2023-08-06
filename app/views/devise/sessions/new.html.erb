@@ -4,11 +4,21 @@
   <div class="field">
     <%= label_tag :email, "メールアドレス" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% if resource.errors[:email].any? %>
+      <div class="error">
+        <%= resource.errors[:email].join(", ") %>
+      </div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= label_tag :password, "パスワード" %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
+    <% if resource.errors[:password].any? %>
+      <div class="error">
+        <%= resource.errors[:password].join(", ") %>
+      </div>
+    <% end %>
   </div>
 
   <% if devise_mapping.rememberable? %>
