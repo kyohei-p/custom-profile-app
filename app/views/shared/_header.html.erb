@@ -1,0 +1,17 @@
+<header style="background-color: #00608d; padding: 30px;">
+  <nav class="nav-container">
+    <div class="logo" style="font-size: 1.5rem; font-weight: bold;">
+      <%= link_to "My Portfolio", root_path, style: "color: white; text-decoration: none;" %>
+    </div>
+    <div class="login-button" style="margin-top:7px;">
+      <% if user_signed_in? %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete,
+                    style: "text-decoration: none; border-radius: 5px; background-color: white; padding: 10px 20px;",
+                    onmouseover: "this.style.color='gray';", onmouseout: "this.style.color='black';" %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, style: "text-decoration: none; border-radius: 5px; background-color: white; padding: 10px 20px;",
+                    onmouseover: "this.style.color='gray';", onmouseout: "this.style.color='black';" %>
+      <% end %>
+    </div>
+  </nav>
+</header>
