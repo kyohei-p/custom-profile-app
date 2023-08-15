@@ -5,6 +5,8 @@ ruby "3.1.3"
 
 gem "devise"
 
+gem 'devise-i18n'
+
 gem "discard"
 
 # gem "ransack"
