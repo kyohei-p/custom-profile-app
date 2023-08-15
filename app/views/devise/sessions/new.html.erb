@@ -1,36 +1,29 @@
-<h2>ログイン</h2>
+<div class="login-container" style="text-align:center;  max-width: 300px; margin: 0 auto;">
+  <h2 style="font-weight: normal;">ログイン</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= label_tag :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    <% if resource.errors[:email].any? %>
-      <div class="error">
-        <%= resource.errors[:email].join(", ") %>
-      </div>
-    <% end %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field" style="margin-top: 30px; text-align: left;">
+      <%= label_tag :email, "メールアドレス", style: "color: gray; font-size: 0.75rem;" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "border: none; border-bottom: 2px solid #ccc; padding-right: 180px;" %>
+      <% if resource.errors[:email].any? %>
+        <div class="error">
+          <%= resource.errors[:email].join(", ") %>
+        </div>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-    <% if resource.errors[:password].any? %>
-      <div class="error">
-        <%= resource.errors[:password].join(", ") %>
-      </div>
-    <% end %>
-  </div>
+    <div class="field" style="margin-top: 30px; text-align: left;">
+      <%= label_tag :password, "パスワード", style: "color: gray; font-size: 0.75rem;" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", style: "border: none; border-bottom: 2px solid #ccc; padding-right: 180px;" %>
+      <% if resource.errors[:password].any? %>
+        <div class="error">
+          <%= resource.errors[:password].join(", ") %>
+        </div>
+      <% end %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field" style="display: none;">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="actions" style="margin-top: 30px;">
+      <%= f.submit "ログインする", style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログインする" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
