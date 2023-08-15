@@ -1,0 +1,5 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインに成功しました。"
+      signed_out: "ログアウトに成功しました。"

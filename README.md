@@ -54,3 +54,15 @@ Ruby on Rails | 7.0.4.2
 - [pry-rails](https://github.com/pry/pry-rails)
 - [rspec-rails](https://github.com/rspec/rspec-rails)
 - [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
+
+### railsでtailwindcssを使用する場合（検討中）
+
+```
+./bin/bundle add tailwindcss-rails
+./bin/rails tailwindcss:install
+./bin/rails assets:precompile
+```
+
+- [チートシート](https://tailwindcomponents.com/cheatsheet/)
+
+- [公式ドキュメント](https://tailwindcss.com/docs/installation)
