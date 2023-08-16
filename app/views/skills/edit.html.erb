@@ -1,8 +1,34 @@
 <% if user_signed_in? %>
-  <div class="skill-list">
+  <div class="skill-container">
+    <% if @show_modal %>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close">&times;</span>
+          <p><%= @modal_message %></p>
+          <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+        </div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function(){
+          console.log("DOMContentLoaded event fired"); 
+          const modal = document.getElementById("modal");
+          modal.style.display = "block";
+
+          const closeButton = document.getElementById("close");
+          closeButton.onclick = function(){
+            modal.style.display = "none";
+          };
+        });
+      </script>
+    <% end %>
     <% @categories.each do |category| %>
       <%= category.name %>
-      <div class="skill-container">
+      <div class="add-button">
+        <button class="add-skill-button" data-category-id="<%= category.id %>" 
+        style="border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;"
+        >スキルを追加する</button>
+      </div>
+      <div class="skill-list">
         <table>
           <thead>
             <tr>
@@ -33,3 +59,14 @@
     <%= link_to "ログイン", new_user_session_path %>
   </div>
 <% end %>
+
+<script>
+  // カテゴリ毎のスキル追加ページへ遷移
+  const addSkillButtons = document.querySelectorAll('.add-skill-button');
+  addSkillButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const categoryId = button.getAttribute('data-category-id');
+      window.location.href = `/categories/${categoryId}/skills/new`;
+    });
+  });
+</script>

@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 
   delete '/users/sign_out' => 'devise/sessions#destroy'
 
-  resources :categories
-  resources :skills do
-    get 'edit_skill', on: :member
+  resources :categories do
+    resources :skills do
+      get 'edit_skill', on: :member
+    end
   end
 end
