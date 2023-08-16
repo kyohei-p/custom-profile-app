@@ -14,7 +14,10 @@
   <div class="skills-container" style="text-align: center;">
     <h2 style="text-decoration: underline;">スキルチャート</h2>
     <div class="actions">
-      <%= button_to "スキルを編集する", data: { turbolinks: false } %>
+      <% if @skills.any? %>
+        <% first_skill = @skills.first %>
+        <%= button_to "スキルを編集する", edit_skill_path(first_skill), method: :get, data: { turbolinks: false } %>
+      <% end %>
     </div>
     <p>ここに棒グラフを置きます</p>
   </div>

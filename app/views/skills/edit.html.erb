@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+  <div class="skill-list">
+    <% @categories.each do |category| %>
+      <%= category.name %>
+      <div class="skill-container">
+        <table>
+          <thead>
+            <tr>
+              <th>習得スキル</th>
+              <th>習得レベル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% skills_in_category = @skills.where(category_id: category.id) %>
+            <% skills_in_category.each do |skill| %>
+              <tr>
+                <td><%= skill.name %></td>
+                <td><%= skill.skill_level %></td>
+              </tr>
+              <tr>
+                <th><%= button_to "習得レベル保存" %></th>
+                <th><%= button_to "スキル削除" %></th>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="please-login" style="text-align:center;">
+    <p>ログインしてください</p>
+    <%= link_to "ログイン", new_user_session_path %>
+  </div>
+<% end %>
