@@ -55,6 +55,14 @@ Ruby on Rails | 7.0.4.2
 - [rspec-rails](https://github.com/rspec/rspec-rails)
 - [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
 
+### Rspec初期化〜テスト実行
+
+```
+docker compose exec web bash
+bundle exec rails generate rspec:install
+bundle exec rspec
+```
+
 ### railsでtailwindcssを使用する場合（検討中）
 
 ```
