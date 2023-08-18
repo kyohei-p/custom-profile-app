@@ -20,14 +20,37 @@ class SkillsController < ApplicationController
 
   def edit
     @category = Category.find(params[:category_id])
-    @skill = Skill.find(params[:id])
+    @skill = Skill.with_deleted.find_by(id: params[:id])
+    # @skill = Skill.find(params[:id])
     @categories = Category.all
     @skills = Skill.all
+
+    render :edit
   end
 
   def new
     @category = Category.find(params[:category_id])
     @skill = @category.skills.build
+  end
+
+  def update
+    @category = Category.find(params[:category_id])
+    @skill = Skill.find(params[:id])
+    
+    if @skill.update!(skill_params)
+      redirect_to edit_category_skill_path(@category, @skill)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:category_id])
+    @skill = Skill.find(params[:id])
+    if @skill.user_id == current_user.id
+      @skill.destroy
+    end
+    redirect_to edit_category_skill_path(@category, @skill)
   end
 
   private

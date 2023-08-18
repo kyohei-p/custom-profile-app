@@ -24,7 +24,8 @@
     <% @categories.each do |category| %>
       <%= category.name %>
       <div class="add-button">
-        <button class="add-skill-button" data-category-id="<%= category.id %>" 
+        <button class="add-skill-button" data-category-id="<%= category.id %>"
+        data-turbo="false"
         style="border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;"
         >スキルを追加する</button>
       </div>
@@ -37,15 +38,20 @@
             </tr>
           </thead>
           <tbody>
-            <% skills_in_category = @skills.where(category_id: category.id) %>
-            <% skills_in_category.each do |skill| %>
+            <% category.skills.each do |skill| %>
               <tr>
                 <td><%= skill.name %></td>
-                <td><%= skill.skill_level %></td>
-              </tr>
-              <tr>
-                <th><%= button_to "習得レベルを保存する" %></th>
-                <th><%= button_to "スキルを削除する" %></th>
+                <td>
+                  <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" do %>
+                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;" } %><br />
+                    <%= submit_tag "習得レベルを保存する", data: { turbolinks: false }, style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;" do %>
+                    <%= submit_tag "スキルを削除する", class: "delete-button", style: "border: 1px solid #ff0000; border-radius: 5px; padding: 5px 10px; background-color: white; color: #ff0000;" %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
@@ -67,6 +73,14 @@
     button.addEventListener('click', () => {
       const categoryId = button.getAttribute('data-category-id');
       window.location.href = `/categories/${categoryId}/skills/new`;
+    });
+  });
+
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // 削除処理を行った後に、ページをリロードする
+      location.reload();
     });
   });
 </script>
