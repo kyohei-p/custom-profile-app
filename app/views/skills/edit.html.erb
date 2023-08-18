@@ -1,0 +1,94 @@
+<% if user_signed_in? %>
+  <div class="skill-container">
+    <% if @show_modal %>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close">&times;</span>
+          <p><%= @modal_message %></p>
+          <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+        </div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function(){
+          console.log("DOMContentLoaded event fired"); 
+          const modal = document.getElementById("modal");
+          modal.style.display = "block";
+
+          const closeButton = document.getElementById("close");
+          closeButton.onclick = function(){
+            modal.style.display = "none";
+          };
+        });
+      </script>
+    <% end %>
+    <% @categories.each do |category| %>
+      <%= category.name %>
+      <div class="add-button">
+        <button class="add-skill-button" data-category-id="<%= category.id %>"
+        data-turbo="false"
+        style="border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;"
+        >スキルを追加する</button>
+      </div>
+      <div class="skill-list">
+        <table>
+          <thead>
+            <tr>
+              <th>習得スキル</th>
+              <th>習得レベル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% category.skills.each do |skill| %>
+              <tr>
+                <td><%= skill.name %></td>
+                <td>
+                  <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" do %>
+                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;" } %><br />
+                    <%= submit_tag "習得レベルを保存する", class: "update-button", style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;" do %>
+                    <%= submit_tag "スキルを削除する", class: "delete-button", style: "border: 1px solid #ff0000; border-radius: 5px; padding: 5px 10px; background-color: white; color: #ff0000;" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="please-login" style="text-align:center;">
+    <p>ログインしてください</p>
+    <%= link_to "ログイン", new_user_session_path %>
+  </div>
+<% end %>
+
+<script>
+  // カテゴリ毎のスキル追加ページへ遷移
+  const addSkillButtons = document.querySelectorAll('.add-skill-button');
+  addSkillButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const categoryId = button.getAttribute('data-category-id');
+      window.location.href = `/categories/${categoryId}/skills/new`;
+    });
+  });
+
+  const updateButtons = document.querySelectorAll('.update-button');
+  updateButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // 更新処理を行った後に、ページをリロードする
+      location.reload();
+    });
+  });
+
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // 削除処理を行った後に、ページをリロードする
+      location.reload();
+    });
+  });
+</script>

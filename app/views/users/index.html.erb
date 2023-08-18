@@ -7,14 +7,18 @@
       <h2>自己紹介</h2>
       <p>自分の自己紹介文が入ります。</p>
       <div class="actions">
-        <%= button_to "自己紹介を編集する", data: { turbolinks: false } %>
+        <%= button_to "自己紹介を編集する", data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
       </div>
     </div>
   </div>
   <div class="skills-container" style="text-align: center;">
-    <h2 style="text-decoration: underline;">スキルチャート</h2>
+    <h2 style="margin-bottom: 0;">スキルチャート</h2>
+    <hr class="underline" style="border: 1.5px solid #ccc; margin: 10px auto 30px; width: 200px;">
     <div class="actions">
-      <%= button_to "スキルを編集する", data: { turbolinks: false } %>
+      <% if @skills.any? %>
+        <% first_skill = @skills.first %>
+        <%= button_to "スキルを編集する", edit_category_skill_path(first_skill.category, first_skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+      <% end %>
     </div>
     <p>ここに棒グラフを置きます</p>
   </div>
