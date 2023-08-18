@@ -44,7 +44,7 @@
                 <td>
                   <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" do %>
                     <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;" } %><br />
-                    <%= submit_tag "習得レベルを保存する", data: { turbolinks: false }, style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;" %>
+                    <%= submit_tag "習得レベルを保存する", class: "update-button", style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;" %>
                   <% end %>
                 </td>
                 <td>
@@ -73,6 +73,14 @@
     button.addEventListener('click', () => {
       const categoryId = button.getAttribute('data-category-id');
       window.location.href = `/categories/${categoryId}/skills/new`;
+    });
+  });
+
+  const updateButtons = document.querySelectorAll('.update-button');
+  updateButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // 更新処理を行った後に、ページをリロードする
+      location.reload();
     });
   });
 

@@ -4,5 +4,5 @@ class Skill < ApplicationRecord
 
     acts_as_paranoid
 
-    validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }
+    validates :name, presence: true, length: { maximum: 255 }
 end
