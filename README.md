@@ -55,6 +55,43 @@ Ruby on Rails | 7.0.4.2
 - [rspec-rails](https://github.com/rspec/rspec-rails)
 - [factory_bot_rails](https://github.com/thoughtbot/factory_bot_rails)
 
+### Rspec初期化〜テスト実行
+
+```
+docker compose exec web bash
+bundle exec rails generate rspec:install
+bundle exec rspec
+```
+
+#### 動作確認例
+```
+## 失敗時（1 failureが0 failuresになればテスト成功）
+Failures:
+
+  1) users/index should display top page
+     Failure/Error: visit root_path
+
+     NoMethodError:
+       undefined method `visit' for #<RSpec::ExampleGroups::UsersIndex "should display top page" (./spec/views/users/index.html.erb_spec.rb:4)>
+     # ./spec/views/users/index.html.erb_spec.rb:5:in `block (2 levels) in <top (required)>'
+
+Finished in 0.36097 seconds (files took 15.44 seconds to load)
+1 example, 1 failure
+
+## 成功時
+root@e22273d19f8e:/myapp# bundle exec rspec
+.
+
+Finished in 1.14 seconds (files took 7.51 seconds to load)
+1 example, 0 failures
+```
+
+#### テスト仕様書（作成中）
+- [テスト仕様書](https://docs.google.com/spreadsheets/d/1ncQnjfbpvykaGYqmEvLZtAkxVcaDKArx/edit?usp=sharing&ouid=102379529971654433248&rtpof=true&sd=true)
+
+#### Rspec(Tips)
+- [Docker+RailsでRSpec導入〜トップページ表示確認テストの書き方まで](https://qiita.com/memomaruRey/items/a93e03eec2eb6e1a8443)
+
 ### railsでtailwindcssを使用する場合（検討中）
 
 ```
