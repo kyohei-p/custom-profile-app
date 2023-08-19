@@ -5,5 +5,6 @@ class User < ApplicationRecord
   has_many :skills
 
   validates :email, presence: true
-  validates :password, presence: true
+  validates :password, presence: true, if: -> { password.present? }
+  validates :self_introduction, presence: true, length: { minimum: 50, maximum: 200 }
 end

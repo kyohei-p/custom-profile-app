@@ -3,9 +3,12 @@
     <div class="image-container" style="flex: 1; text-align: center;">
       <p>ここにアバター画像を置きます</p>
     </div>
-    <div class="intro-container" style="flex: 1; text-align: center;">
-      <h2>自己紹介</h2>
-      <p>自分の自己紹介文が入ります。</p>
+    <div class="intro-container" style="flex: 1; text-align: left;">
+      <h2 style="margin-bottom: 0;">自己紹介</h2>
+      <hr class="underline" style="border: 1.5px solid #ccc; margin: 10px auto 30px 0; width: 200px;">
+      <% @users.each do |user| %>
+        <p style="padding-right: 100px;"><%= user.self_introduction %></p>
+      <% end %>
       <div class="actions">
         <%= button_to "自己紹介を編集する", edit_user_path(current_user), method: :get, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
       </div>
