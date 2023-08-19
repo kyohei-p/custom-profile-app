@@ -2,7 +2,7 @@ User.create!(
   name: "sample",
   email: "sample1@example.com",
   password: "000000",
-  self_introduction: "sampleです"
+  self_introduction: "sampleですsampleですsampleですsampleですsampleですsampleですsampleですsampleですsampleですsampleです"
 )
 
 Category.create!(name: "バックエンド")

@@ -7,7 +7,7 @@
       <h2>自己紹介</h2>
       <p>自分の自己紹介文が入ります。</p>
       <div class="actions">
-        <%= button_to "自己紹介を編集する", data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+        <%= button_to "自己紹介を編集する", edit_user_path(current_user), method: :get, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
       </div>
     </div>
   </div>

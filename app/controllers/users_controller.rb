@@ -7,6 +7,10 @@ class UsersController < ApplicationController
       @skills = Skill.all 
     end
 
+    def edit
+      @user = current_user
+    end
+
     private
 
     def check_login
