@@ -1,6 +1,5 @@
-<div class="login-container" style="text-align:center;  max-width: 300px; margin: 0 auto;">
-  <h2 style="font-weight: normal;">ログイン</h2>
-
+<div class="login-container">
+  <h2>ログイン</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field" style="margin-top: 30px; text-align: left;">
       <%= label_tag :email, "メールアドレス", style: "color: gray; font-size: 0.75rem;" %><br />
