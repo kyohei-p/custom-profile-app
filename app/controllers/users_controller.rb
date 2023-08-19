@@ -4,10 +4,26 @@ class UsersController < ApplicationController
 
     def index
       @user = current_user
-      @skills = Skill.all 
+      @users = User.all
+      @skills = Skill.all
+    end
+
+    def edit
+      @user = current_user
+    end
+
+    def update
+      @user = User.find(params[:id])
+      if @user.update!(user_params)
+        redirect_to root_path
+      end
     end
 
     private
+
+    def user_params
+      params.require(:user).permit(:self_introduction, :image)
+    end
 
     def check_login
       unless user_signed_in?

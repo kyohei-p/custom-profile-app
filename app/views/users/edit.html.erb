@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+  <div class="profile-edit-container" style="text-align:center;  max-width: 300px; margin: 0 auto;">
+    <h2 style="font-weight: normal;">自己紹介を編集する</h2>
+    <%= form_with(model: @user, local: true) do |f| %> 
+      <div class="field" style="margin-top: 30px; text-align: left;">
+        <%= label_tag :self_introduction, "自己紹介文", style: "color: gray; font-size: 0.75rem;" %><br />
+        <%= f.text_area :self_introduction, autofocus: true, style: "border: none; border-bottom: 2px solid #ccc; width: -webkit-fill-available; white-space: pre-line; resize: none;" %>
+        <% if @user.errors[:self_introduction].any? %>
+          <div class="error">
+            <%= @user.errors[:self_introduction].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+      <div class="field" style="margin-top: 30px; text-align: left;">
+        <%= label_tag :self_introduction, "アバター画像", style: "color: gray; font-size: 0.75rem;" %><br />
+        <%= f.file_field :image %>
+      </div>
+
+      <div class="actions" style="margin-top: 30px;">
+        <%= f.submit "自己紹介を確定する", style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -12,4 +12,6 @@ Rails.application.routes.draw do
       get 'edit_skill', on: :member
     end
   end
+
+  resources :users
 end
