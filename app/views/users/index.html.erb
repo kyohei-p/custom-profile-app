@@ -1,8 +1,8 @@
 <div class="main-container" style="margin: 50px;">
   <div class="flex-container" style="display: flex; justify-content: center; margin: 50px 0;">
     <div class="image-container" style="flex: 1; text-align: center;">
-      <% if @user.avatar.attached? %>
-        <%= image_tag @user.avatar, width: 200, height: 200, style: "border-radius: 50%; border: 0.5px solid #ccc;" %>
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, width: 200, height: 200, style: "border-radius: 50%; border: 0.5px solid #ccc;" %>
       <% else %>
         <%= image_tag "default_avatar.png", width: 200, height: 200, style:"border-radius: 50%; border: 0.5px solid #ccc;" %>
       <% end %>

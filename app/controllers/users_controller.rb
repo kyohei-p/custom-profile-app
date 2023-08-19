@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-      params.require(:user).permit(:self_introduction, :avatar)
+      params.require(:user).permit(:self_introduction, :image)
     end
 
     def check_login
