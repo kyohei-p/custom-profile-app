@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :skills
+  has_one_attached :avatar
 
   validates :email, presence: true
   validates :password, presence: true, if: -> { password.present? }

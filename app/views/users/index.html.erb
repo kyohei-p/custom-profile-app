@@ -1,7 +1,11 @@
 <div class="main-container" style="margin: 50px;">
   <div class="flex-container" style="display: flex; justify-content: center; margin: 50px 0;">
     <div class="image-container" style="flex: 1; text-align: center;">
-      <p>ここにアバター画像を置きます</p>
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, width: 200, height: 200, style: "border-radius: 50%; border: 0.5px solid #ccc;" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", width: 200, height: 200, style:"border-radius: 50%; border: 0.5px solid #ccc;" %>
+      <% end %>
     </div>
     <div class="intro-container" style="flex: 1; text-align: left;">
       <h2 style="margin-bottom: 0;">自己紹介</h2>
