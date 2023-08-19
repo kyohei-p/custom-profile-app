@@ -103,3 +103,26 @@ Finished in 1.14 seconds (files took 7.51 seconds to load)
 - [チートシート](https://tailwindcomponents.com/cheatsheet/)
 
 - [公式ドキュメント](https://tailwindcss.com/docs/installation)
+
+### CSSが反映されない時の対処法
+- 以下の各ファイルにて設定がされているか確認してください
+app/assets/stylesheets/application.css
+```
+ *= require_tree .
+ *= require_self
+```
+app/assets/config/manifest.js
+```
+//= link_directory ../stylesheets .css
+```
+app/views/layouts/application.html.erb
+```
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>   
+```
+
+- ブラウザのキャッシュクリアをしてください
+- public直下のassetsフォルダを削除し、Docker再起動してください
+```
+public/assets
+```
+https://qiita.com/scivola/items/e3e766b3e672a39b7a8f
