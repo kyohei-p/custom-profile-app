@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div class="skills-container" style="text-align: center;">
+  <div class="chart-container" style="text-align: center;">
     <h2 style="margin-bottom: 0;">スキルチャート</h2>
     <hr class="underline" style="border: 1.5px solid #ccc; margin: 10px auto 30px; width: 200px;">
     <div class="actions">
@@ -27,6 +27,52 @@
         <%= button_to "スキルを編集する", edit_category_skill_path(first_skill.category, first_skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
       <% end %>
     </div>
-    <p>ここに棒グラフを置きます</p>
+    <p class="chartbar-name" style="font-weight: bold; font-size: 0.5rem;">Chart.js Bar Chart</p>
+    <canvas id="myChart"></canvas>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['先々月', '先月', '今月'],
+        datasets:[
+          {
+            label: 'バックエンド',
+            data: [<%= @data["バックエンド"]["先々月"] || 0 %>, <%= @data["バックエンド"]["先月"] || 0 %>, <%= @data["バックエンド"]["今月"] || 0 %>],
+            backgroundColor: 'rgba(254, 178, 194, 0.7)',
+            borderColor: 'rgba(254, 178, 194, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'フロントエンド',
+            data: [<%= @data["フロントエンド"]["先々月"] || 0 %>, <%= @data["フロントエンド"]["先月"] || 0 %>, <%= @data["フロントエンド"]["今月"] || 0 %>],
+            backgroundColor: 'rgb(255, 207, 164, 0.7)',
+            borderColor: 'rgb(255, 207, 164, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'インフラ',
+            data: [<%= @data["インフラ"]["先々月"] || 0 %>, <%= @data["インフラ"]["先月"] || 0 %>, <%= @data["インフラ"]["今月"] || 0 %>],
+            backgroundColor: 'rgba(254, 229, 176, 0.7)',
+            borderColor: 'rgb(254, 229, 176, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 10,
+              min: 0
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
