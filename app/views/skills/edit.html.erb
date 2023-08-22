@@ -1,26 +1,12 @@
 <% if user_signed_in? %>
   <div class="skill-container">
-    <% if @show_modal %>
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <span class="close" id="close">&times;</span>
-          <p><%= @modal_message %></p>
-          <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
-        </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <p class="modal-text"><%= @skill.name %>の習得レベルを保存しました!</p>
+        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white; margin: 10px auto 20px;", id: "myModal" %>
       </div>
-      <script>
-        document.addEventListener("DOMContentLoaded", function(){
-          console.log("DOMContentLoaded event fired"); 
-          const modal = document.getElementById("modal");
-          modal.style.display = "block";
-
-          const closeButton = document.getElementById("close");
-          closeButton.onclick = function(){
-            modal.style.display = "none";
-          };
-        });
-      </script>
-    <% end %>
+    </div>
     <% @categories.each do |category| %>
       <%= category.name %>
       <div class="add-button">
@@ -44,7 +30,7 @@
                 <td>
                   <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" do %>
                     <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;" } %><br />
-                    <%= submit_tag "習得レベルを保存する", class: "update-button", style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;" %>
+                    <%= submit_tag "習得レベルを保存する", class: "update-button", style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;", onclick: "showModal();" %>
                   <% end %>
                 </td>
                 <td>
@@ -78,9 +64,12 @@
 
   const updateButtons = document.querySelectorAll('.update-button');
   updateButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      // 更新処理を行った後に、ページをリロードする
-      location.reload();
+    button.addEventListener('click', function(event) {
+
+      event.preventDefault();
+
+      showModal();
+
     });
   });
 
@@ -91,4 +80,68 @@
       location.reload();
     });
   });
+
+  let modalVisible = false;
+
+  function showModal() {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'block';
+      modalVisible = true;
+  }
+
+  function hideModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+    modalVisible = false;
+  }
+
+
+
 </script>
+
+<style>
+  /* モーダルのスタイル */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* モーダルのコンテンツスタイル */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    /* border-radius: 5px; */
+    position: relative;
+  }
+
+  .modal-text {
+    margin: 20px auto;
+  }
+
+  /* 閉じるボタンのスタイル */
+  .close {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: #333;
+  }
+</style>
