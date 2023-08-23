@@ -50,41 +50,46 @@
 <% end %>
 
 <script>
-  // カテゴリ毎のスキル追加ページへ遷移
-  const addSkillButtons = document.querySelectorAll('.add-skill-button');
-  addSkillButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const categoryId = button.getAttribute('data-category-id');
-      window.location.href = `/categories/${categoryId}/skills/new`;
-    });
-  });
-
-  const updateButtons = document.querySelectorAll('.update-button');
-  updateButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-
-      // event.preventDefault();
-
-      showModal('update');
-
-    });
-  });
-
-  const deleteButtons = document.querySelectorAll('.delete-button');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      // 削除処理を行った後に、ページをリロードする
-      location.reload();
-    });
-  });
-
 
   function showModal() {
     const modal = document.getElementById('myModal');
-    const modalMessage = document.getElementById('modalMessage');
-    const backButton = document.getElementById('backButton');
-
     modal.style.display = 'block';
   }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const updateForm = document.getElementById('update-form');
+    const updateButton = updateForm.querySelector('.update-button');
+
+      // カテゴリ毎のスキル追加ページへ遷移
+    const addSkillButtons = document.querySelectorAll('.add-skill-button');
+    addSkillButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const categoryId = button.getAttribute('data-category-id');
+        window.location.href = `/categories/${categoryId}/skills/new`;
+      });
+    });
+    
+    updateForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // デフォルトのフォーム送信をキャンセル
+      
+      // フォームのデータを取得
+      const formData = new FormData(updateForm);
+      
+      // Ajaxリクエストで更新処理を非同期で実行
+      fetch(updateForm.action, {
+        method: 'PATCH',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // 更新処理が成功した場合、モーダルを表示
+          showModal();
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    });
+  });
 </script>
