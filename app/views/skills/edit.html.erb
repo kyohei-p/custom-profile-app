@@ -2,18 +2,15 @@
   <div class="skill-container">
     <div id="myModal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="hideModal()">&times;</span>
         <p class="modal-text"><%= @skill.name %>の習得レベルを保存しました!</p>
-        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white; margin: 10px auto 20px;", id: "myModal" %>
+        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, id: "backButton" %>
       </div>
     </div>
     <% @categories.each do |category| %>
       <%= category.name %>
       <div class="add-button">
         <button class="add-skill-button" data-category-id="<%= category.id %>"
-        data-turbo="false"
-        style="border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;"
-        >スキルを追加する</button>
+        data-turbo="false">スキルを追加する</button>
       </div>
       <div class="skill-list">
         <table>
@@ -28,14 +25,14 @@
               <tr>
                 <td><%= skill.name %></td>
                 <td>
-                  <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" do %>
-                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;" } %><br />
-                    <%= submit_tag "習得レベルを保存する", class: "update-button", style: "border: 1px solid #00608d; border-radius: 5px; padding: 5px 10px; height: fit-content; background-color: white; color: #00608d;", onclick: "showModal();" %>
+                  <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form" do %>
+                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag" %><br />
+                    <%= submit_tag "習得レベルを保存する", class: "update-button", onclick: "showModal();" %>
                   <% end %>
                 </td>
                 <td>
                   <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;" do %>
-                    <%= submit_tag "スキルを削除する", class: "delete-button", style: "border: 1px solid #ff0000; border-radius: 5px; padding: 5px 10px; background-color: white; color: #ff0000;" %>
+                    <%= submit_tag "スキルを削除する", class: "delete-button" %>
                   <% end %>
                 </td>
               </tr>
@@ -66,9 +63,9 @@
   updateButtons.forEach(button => {
     button.addEventListener('click', function(event) {
 
-      event.preventDefault();
+      // event.preventDefault();
 
-      showModal();
+      showModal('update');
 
     });
   });
@@ -81,67 +78,13 @@
     });
   });
 
-  let modalVisible = false;
 
   function showModal() {
-      const modal = document.getElementById('myModal');
-      modal.style.display = 'block';
-      modalVisible = true;
-  }
-
-  function hideModal() {
     const modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-    modalVisible = false;
+    const modalMessage = document.getElementById('modalMessage');
+    const backButton = document.getElementById('backButton');
+
+    modal.style.display = 'block';
   }
-
-
 
 </script>
-
-<style>
-  /* モーダルのスタイル */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  /* モーダルのコンテンツスタイル */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-    /* border-radius: 5px; */
-    position: relative;
-  }
-
-  .modal-text {
-    margin: 20px auto;
-  }
-
-  /* 閉じるボタンのスタイル */
-  .close {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-  }
-
-  .close:hover {
-    color: #333;
-  }
-</style>

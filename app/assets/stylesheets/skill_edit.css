@@ -1,0 +1,33 @@
+.add-skill-button, #backButton {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 50px;
+  background-color: #00608d;
+  color: white;
+}
+
+#backButton {
+  margin: 10px auto 20px;
+}
+
+.update-button {
+  border: 1px solid #00608d;
+  border-radius: 5px;
+  padding: 5px 10px;
+  height: fit-content;
+  background-color: white;
+  color: #00608d;
+}
+
+.delete-button {
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color:
+  white; color: #ff0000
+}
+
+.skill-level-tag {
+  border: 1px solid #ccc;
+  padding: 0 5px;
+}
