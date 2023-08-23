@@ -4,12 +4,12 @@
     <%= form_with(model: @category.skills.build, url: category_skills_path(@category)) do |f| %>
       <div class="field" style="margin-top: 30px; text-align: left;">
           <%= label_tag :name, "習得スキル名", style: "color: gray; font-size: 0.75rem;" %><br />
-          <%= f.text_field :name, autocomplete: "name", style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px; width: 125px;" %><br />
+          <%= f.text_field :name, autocomplete: "name", style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; width: 320px;" %><br />
           <% if @skill.errors.has_key?(:name) %>
             <p class="error-message"><%= @skill.errors[:name].first %></p>
           <% end %>
           <%= label_tag :skill_level, "習得レベル", style: "color: gray; font-size: 0.75rem;" %><br />
-          <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;"} %><br />
+          <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; width: 320px;" } %><br />
           <% if @skill.errors.has_key?(:skill_level) %>
             <p class="error-message"><%= @skill.errors[:skill_level].first %></p>
           <% end %>

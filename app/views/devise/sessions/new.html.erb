@@ -1,24 +1,19 @@
 <div class="login-container">
   <h2>ログイン</h2>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field" style="margin-top: 30px; text-align: left;">
       <%= label_tag :email, "メールアドレス", style: "color: gray; font-size: 0.75rem;" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "border: none; border-bottom: 2px solid #ccc; padding-right: 180px;" %>
-      <% if resource.errors[:email].any? %>
-        <div class="error">
-          <%= resource.errors[:email].join(", ") %>
-        </div>
-      <% end %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
     </div>
 
     <div class="field" style="margin-top: 30px; text-align: left;">
       <%= label_tag :password, "パスワード", style: "color: gray; font-size: 0.75rem;" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", style: "border: none; border-bottom: 2px solid #ccc; padding-right: 180px;" %>
-      <% if resource.errors[:password].any? %>
-        <div class="error">
-          <%= resource.errors[:password].join(", ") %>
-        </div>
-      <% end %>
+      <%= f.password_field :password, autocomplete: "current-password", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
     </div>
 
     <div class="actions" style="margin-top: 30px;">
