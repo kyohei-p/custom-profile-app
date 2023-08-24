@@ -1,0 +1,32 @@
+.profile-edit-container {
+  text-align:center; 
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.text-area {
+  border: none;
+  border-bottom: 1px solid #595959;
+  width: -webkit-fill-available;
+  white-space: pre-line;
+  resize: none;
+}
+
+
+.image-input-btn{
+  display: block;
+  background-color: #e5e5e5;
+  width: 150px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  padding-top: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.image-form{
+  display: none;
+}
