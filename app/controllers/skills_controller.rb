@@ -34,13 +34,14 @@ class SkillsController < ApplicationController
   end
 
   def update
+    puts params
     @category = Category.find(params[:category_id])
     @skill = Skill.find(params[:id])
     
     if @skill.update!(skill_params)
-      redirect_to edit_category_skill_path(@category, @skill)
+      render json: { success: true, message: "スキルの更新に成功しました", skill: @skill.attributes }
     else
-      render :edit
+      render json: { success: false, errors: @skill.errors.full_messages }
     end
   end
 

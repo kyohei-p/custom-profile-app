@@ -22,12 +22,12 @@
           </thead>
           <tbody>
             <% category.skills.each do |skill| %>
-              <tr>
+              <tr data-id=<%= skill.id %>>
                 <td><%= skill.name %></td>
                 <td>
                   <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form" do %>
-                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag" %><br />
-                    <%= submit_tag "習得レベルを保存する", class: "update-button", onclick: "showModal();" %>
+                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %><br />
+                    <%= submit_tag "習得レベルを保存する", class: "update-button", data: { turbolinks: false } %>
                   <% end %>
                 </td>
                 <td>
@@ -59,6 +59,8 @@
   document.addEventListener('DOMContentLoaded', function() {
     const updateForm = document.getElementById('update-form');
     const updateButton = updateForm.querySelector('.update-button');
+    const categoryId = <%= @category.id %>;
+    const skillId = <%= @skill.id %>;
 
       // カテゴリ毎のスキル追加ページへ遷移
     const addSkillButtons = document.querySelectorAll('.add-skill-button');
@@ -74,16 +76,16 @@
       
       // フォームのデータを取得
       const formData = new FormData(updateForm);
-      
+      console.log(updateForm.action);
       // Ajaxリクエストで更新処理を非同期で実行
       fetch(updateForm.action, {
-        method: 'PATCH',
+        method: 'POST',
         body: formData
       })
       .then(response => response.json())
       .then(data => {
+        console.log("Sucess");
         if (data.success) {
-          // 更新処理が成功した場合、モーダルを表示
           showModal();
         }
       })
