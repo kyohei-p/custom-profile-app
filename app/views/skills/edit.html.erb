@@ -46,14 +46,10 @@
   const skillId = <%= @skill.id %>;
   console.log(skillId);
 
+  //モーダルの表示
   function showModal(message) {
     const modal = document.getElementById('myModal');
     const modalMessage = modal.querySelector('#modalMessage');
-    const backButton = modal.querySelector('#backButton');
-
-    backButton.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
 
     modalMessage.textContent = message;
     modal.style.display = 'block';
@@ -69,31 +65,37 @@
     });
   });
 
+  //スキルレベルのUpdate処理
   document.addEventListener('DOMContentLoaded', function() {
     const updateForm = document.getElementById('update-form');
-    const updateButton = updateForm.querySelector('.update-button');
+    const updateButtons = document.querySelectorAll('.update-button');
 
-    updateForm.addEventListener('submit', function(event) {
-      event.preventDefault(); // デフォルトのフォーム送信をキャンセル
-      
-      // フォームのデータを取得
-      const formData = new FormData(updateForm);
-      console.log(updateForm.action);
+    //update-buttonのクリックイベント
+    updateButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // デフォルトのフォーム送信をキャンセル
 
-      // Ajaxリクエストで更新処理を非同期で実行
-      fetch(updateForm.action, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        // console.log("Sucess");
-        if (data.success) {
-          showModal(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
+        const skillId = button.getAttribute('data-id');
+        console.log(skillId);
+
+        // フォームのデータを取得
+        const formData = new FormData(updateForm);
+        console.log(updateForm.action);
+
+        // Ajaxリクエストで更新処理を非同期で実行
+        fetch(updateForm.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showModal(data.message);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
       });
     });
   });
@@ -115,7 +117,6 @@
       })
       .then(response => response.json())
       .then(data => {
-        // console.log("Sucess");
         if (data.success) {
           showModal(data.message);
         }
