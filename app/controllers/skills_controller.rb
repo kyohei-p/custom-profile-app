@@ -2,6 +2,9 @@ class SkillsController < ApplicationController
   before_action :set_category_ids, only: [:edit, :new]
 
   def index
+    @category = Category.find(params[:category_id])
+    @skill = Skill.new
+    render :new
   end
 
   def create

@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        self_introduction: "自己紹介文"
+    errors:
+      models:
+        user:
+          attributes:
+            self_introduction:
+              blank: "自己紹介文を入力してください"
+              too_long: "50文字以上、200文字未満で入力してください"
+        skill:
+          attributes:
+            name:
+              blank: "習得スキル名を入力してください"
+              too_long: "255文字以内で入力してください"
+            skill_level:
+              blank: "0~100の間で選択してください"
