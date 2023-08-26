@@ -9,7 +9,8 @@ ja:
           attributes:
             self_introduction:
               blank: "自己紹介文を入力してください"
-              too_long: "50文字以上、200文字未満で入力してください"
+              too_short: "50文字以上、200文字未満で入力してください"              
+              too_long: "200文字未満で入力してください"
         skill:
           attributes:
             name:

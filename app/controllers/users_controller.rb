@@ -25,6 +25,11 @@ class UsersController < ApplicationController
       end
     end
 
+    def show
+      @user = current_user
+      render :edit
+    end
+
     def edit
       if user_signed_in?
         @user = current_user
