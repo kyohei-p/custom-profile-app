@@ -30,3 +30,7 @@
 .image-form{
   display: none;
 }
+
+.signin-actions {
+  margin-top: 30px;
+}
