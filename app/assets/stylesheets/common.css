@@ -6,6 +6,71 @@ body{
   margin: 160px 50px 50px;
 }
 
+header {
+  background-color: #00608d;
+  width: 100%;
+  padding: 30px;
+  position: fixed;
+  top: 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-link {
+  color: white;
+  text-decoration: none;
+}
+
+.login-button-container {
+  margin-top:7px;
+  margin-right: 50px;
+}
+
+.login-button {
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px 20px;
+  color: #6d6d6d;
+}
+
+.login-button:hover {
+  color: black;
+}
+
+.logout-button {
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px 20px;
+  color: #6d6d6d;
+}
+
+.logout-button:hover {
+  color: black;
+}
+
+footer {
+  background-color: #00608d;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.copyright {
+  color:white;
+  text-align:center;
+}
+
+
 h2{
   font-weight: normal;
 }
