@@ -1,82 +1,85 @@
-<% if user_signed_in? %>
-  <div class="skill-container">
+<div class="skill-container">
     <div id="myModal" class="modal">
       <div class="modal-content">
-        <p class="modal-text"><%= @skill.name %>の習得レベルを保存しました!</p>
-        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbolinks: false }, id: "backButton" %>
+        <p class="modal-text" id="modalMessage"></p>
+        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
       </div>
     </div>
-    <% @categories.each do |category| %>
-      <%= category.name %>
-      <div class="add-button">
-        <button class="add-skill-button" data-category-id="<%= category.id %>"
-        data-turbo="false">スキルを追加する</button>
-      </div>
-      <div class="skill-list">
-        <table>
-          <thead>
-            <tr>
-              <th>習得スキル</th>
-              <th>習得レベル</th>
+
+  <% @categories.each do |category| %>
+    <%= category.name %>
+    <div class="add-button">
+      <button class="add-skill-button" data-category-id="<%= category.id %>"
+      data-turbo="false">スキルを追加する</button>
+    </div>
+    <div class="skill-list">
+      <table>
+        <thead>
+          <tr>
+            <th>習得スキル</th>
+            <th>習得レベル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% category.skills.each do |skill| %>
+            <tr data-id=<%= skill.id %>>
+              <td><%= skill.name %></td>
+              <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form", data: { turbo: false, turbolinks: false } do %>
+                <td><%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %></td>
+                <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { turbolinks: false } %></td>
+              <% end %>
+              <td>
+                <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;", id: "delete-form", data: { turbo: false, turbolinks: false } do %>
+                  <%= submit_tag "スキルを削除する", class: "delete-button", data: { turbolinks: false } %>
+                <% end %>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <% category.skills.each do |skill| %>
-              <tr data-id=<%= skill.id %>>
-                <td><%= skill.name %></td>
-                <td>
-                  <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form" do %>
-                    <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %><br />
-                    <%= submit_tag "習得レベルを保存する", class: "update-button", data: { turbolinks: false } %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;" do %>
-                    <%= submit_tag "スキルを削除する", class: "delete-button" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <div class="please-login" style="text-align:center;">
-    <p>ログインしてください</p>
-    <%= link_to "ログイン", new_user_session_path %>
-  </div>
-<% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
 
 <script>
+  const categoryId = <%= @category.id %>;
+  const skillId = <%= @skill.id %>;
+  console.log(skillId);
 
-  function showModal() {
+  function showModal(message) {
     const modal = document.getElementById('myModal');
+    const modalMessage = modal.querySelector('#modalMessage');
+    const backButton = modal.querySelector('#backButton');
+
+    backButton.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modalMessage.textContent = message;
     modal.style.display = 'block';
   }
+
+  // カテゴリ毎のスキル追加ページへ遷移
+  const addSkillButtons = document.querySelectorAll('.add-skill-button');
+  console.log(addSkillButtons);
+  addSkillButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const categoryId = button.getAttribute('data-category-id');
+      window.location.href = `/categories/${categoryId}/skills/new`;
+    });
+  });
 
   document.addEventListener('DOMContentLoaded', function() {
     const updateForm = document.getElementById('update-form');
     const updateButton = updateForm.querySelector('.update-button');
-    const categoryId = <%= @category.id %>;
-    const skillId = <%= @skill.id %>;
 
-      // カテゴリ毎のスキル追加ページへ遷移
-    const addSkillButtons = document.querySelectorAll('.add-skill-button');
-    addSkillButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const categoryId = button.getAttribute('data-category-id');
-        window.location.href = `/categories/${categoryId}/skills/new`;
-      });
-    });
-    
     updateForm.addEventListener('submit', function(event) {
       event.preventDefault(); // デフォルトのフォーム送信をキャンセル
       
       // フォームのデータを取得
       const formData = new FormData(updateForm);
       console.log(updateForm.action);
+
       // Ajaxリクエストで更新処理を非同期で実行
       fetch(updateForm.action, {
         method: 'POST',
@@ -84,9 +87,9 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log("Sucess");
+        // console.log("Sucess");
         if (data.success) {
-          showModal();
+          showModal(data.message);
         }
       })
       .catch(error => {
@@ -94,4 +97,33 @@
       });
     });
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteForm = document.getElementById('delete-form');
+    // フォームのデータを削除
+    deleteForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // デフォルトのフォーム送信をキャンセル
+
+      // フォームのデータを取得
+      const formData = new FormData(deleteForm);
+      console.log(deleteForm.action);
+
+      // Ajaxリクエストで更新処理を非同期で実行
+      fetch(deleteForm.action, {
+        method: 'DELETE',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // console.log("Sucess");
+        if (data.success) {
+          showModal(data.message);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    });
+  });
+
 </script>

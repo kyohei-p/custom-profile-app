@@ -19,18 +19,26 @@ class SkillsController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:category_id])
-    @skill = Skill.with_deleted.find_by(id: params[:id])
-    # @skill = Skill.find(params[:id])
-    @categories = Category.all
-    @skills = Skill.all
+    if user_signed_in?
+      @category = Category.find(params[:category_id])
+      @skill = Skill.with_deleted.find_by(id: params[:id])
+      # @skill = Skill.find(params[:id])
+      @categories = Category.all
+      @skills = Skill.all
 
-    render :edit
+      render :edit
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def new
-    @category = Category.find(params[:category_id])
-    @skill = @category.skills.build
+    if user_signed_in?
+      @category = Category.find(params[:category_id])
+      @skill = @category.skills.build
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def update
@@ -39,9 +47,11 @@ class SkillsController < ApplicationController
     @skill = Skill.find(params[:id])
     
     if @skill.update!(skill_params)
-      render json: { success: true, message: "スキルの更新に成功しました", skill: @skill.attributes }
+      @success_update_message = "#{@skill.name}の習得レベルを保存しました！"
+      render json: { success: true, message: @success_update_message, skill: @skill.attributes }
     else
-      render json: { success: false, errors: @skill.errors.full_messages }
+      @error_update_message = "保存に失敗しました。"
+      render json: { success: false, message: @error_update_message, errors: @skill.errors.full_messages }
     end
   end
 
@@ -50,8 +60,12 @@ class SkillsController < ApplicationController
     @skill = Skill.find(params[:id])
     if @skill.user_id == current_user.id
       @skill.destroy
+      @success_delete_message = "#{@skill.name}の項目を削除しました！"
+      render json: { success: true, message: @success_delete_message, skill: @skill.attributes }
+    else
+      @error_delete_message = "削除に失敗しました。"
+      render json: { success: false, message: @error_delete_message, errors: @skill.errors.full_messages }
     end
-    redirect_to edit_category_skill_path(@category, @skill)
   end
 
   private
