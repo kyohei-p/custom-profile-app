@@ -1,22 +1,28 @@
 <div class="login-container">
   <h2>ログイン</h2>
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field" style="margin-top: 30px; text-align: left;">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { "data-turbo": "false" }) do |f| %>
+    <div class="field" style="margin-top: 30px; text-align: left;" data-turbo="false">
       <%= label_tag :email, "メールアドレス", style: "color: gray; font-size: 0.75rem;" %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
+      <% if @user.errors[:email].any? %>
+        <div class="error" data-turbo="false">
+          <%= @user.errors[:email].join(", ") %>
+          <%= debug @user.errors %>
+        </div>
+      <% end %>
     </div>
 
-    <div class="field" style="margin-top: 30px; text-align: left;">
+    <div class="field" style="margin-top: 30px; text-align: left;" data-turbo="false">
       <%= label_tag :password, "パスワード", style: "color: gray; font-size: 0.75rem;" %><br />
       <%= f.password_field :password, autocomplete: "current-password", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
+      <% if @user.errors[:password].any? %>
+        <div class="error" data-turbo="false">
+          <%= @user.errors[:password].join(", ") %>
+        </div>
+      <% end %>
     </div>
 
-    <div class="actions" style="margin-top: 30px;">
+    <div class="actions" style="margin-top: 30px;" data-turbo="false">
       <%= f.submit "ログインする", style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
     </div>
   <% end %>

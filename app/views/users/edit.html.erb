@@ -1,25 +1,23 @@
-<% if user_signed_in? %>
-  <div class="profile-edit-container">
-    <h2>自己紹介を編集する</h2>
-    <%= form_with(model: @user, local: true) do |f| %> 
-      <div class="field">
-        <%= label_tag :self_introduction, "自己紹介文", class: "label-tag" %><br />
-        <%= f.text_area :self_introduction, autofocus: true, class: "text-area" %>
-        <% if @user.errors[:self_introduction].any? %>
-          <div class="error">
-            <%= @user.errors[:self_introduction].join(", ") %>
-          </div>
-        <% end %>
-      </div>
-      <div class="field">
-        <%= label_tag :self_introduction, "アバター画像", class: "label-tag" %><br />
-        <%= f.label :image, "画像ファイルを添付する", class: "image-input-btn" %>
-        <%= f.file_field :image, class: "image-form" %>
-      </div>
+<div class="profile-edit-container">
+  <h2>自己紹介を編集する</h2>
+  <%= form_with(model: @user, local: true) do |f| %> 
+    <div class="field" data-turbo="false">
+      <%= label_tag :self_introduction, "自己紹介文", class: "label-tag" %><br />
+      <%= f.text_area :self_introduction, autofocus: true, class: "text-area" %>
+      <% if @user.errors[:self_introduction].any? %>
+        <div class="error">
+          <%= @user.errors[:self_introduction].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+    <div class="field" data-turbo="false">
+      <%= label_tag :self_introduction, "アバター画像", class: "label-tag" %><br />
+      <%= f.label :image, "画像ファイルを添付する", class: "image-input-btn" %>
+      <%= f.file_field :image, class: "image-form" %>
+    </div>
 
-      <div class="actions" style="margin-top: 30px;">
-        <%= f.submit "自己紹介を確定する", class:"submit-button" %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+    <div class="actions" style="margin-top: 30px;" data-turbo="false">
+      <%= f.submit "自己紹介を確定する", class:"submit-button" %>
+    </div>
+  <% end %>
+</div>

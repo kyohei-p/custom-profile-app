@@ -11,12 +11,6 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    if user_signed_in?
-
-    else
-      flash[:alert]
-      render :new
-    end
   end
 
   # DELETE /resource/sign_out
