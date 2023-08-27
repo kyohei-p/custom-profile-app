@@ -84,12 +84,19 @@ td {
 .triangle-arrow::before {
   content: "";
   position: absolute;
-  top: -37px;
-  left: 120px;
+  top: -4px;
+  right: 20px;
   transform: translateY(-50%) rotate(180deg);
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #757575;
+}
+
+@media screen and (max-width: 1164px) {
+  .triangle-arrow::before {
+    top: -38px;
+    right: -130px;
+  }
 }
 
 /* エスケープシーケンス&#9660;を使用した場合 */
