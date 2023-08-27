@@ -28,14 +28,14 @@
         </thead>
         <tbody>
           <% category.skills.each do |skill| %>
-            <tr data-id=<%= skill.id %>>
+            <tr data-skill-id=<%= skill.id %>>
               <td><%= skill.name %></td>
               <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form", data: { turbo: false, turbolinks: false } do %>
                 <td>
                   <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %>
                   <span class="triangle-arrow"></span>
                 </td>
-                <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { turbolinks: false } %></td>
+                <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { id: @skill.id, turbolinks: false } %></td>
               <% end %>
               <td>
                 <%= form_tag category_skill_path(category, skill), method: :delete, data: { confirm: '本当に削除しますか？' }, style: "display:flex;", id: "delete-form", data: { turbo: false, turbolinks: false } do %>
@@ -51,22 +51,20 @@
 </div>
 
 <script>
-  const categoryId = <%= @category.id %>;
-  const skillId = <%= @skill.id %>;
-  console.log(skillId);
 
   //モーダルの表示
-  function showModal(message) {
+  function showModal(skillName) {
     const modal = document.getElementById('myModal');
     const modalMessage = modal.querySelector('#modalMessage');
 
-    modalMessage.textContent = message;
+    const fullMessage = `${skillName}のスキルレベルを保存しました!`;
+    modalMessage.textContent = fullMessage;
+
     modal.style.display = 'block';
   }
 
   // カテゴリ毎のスキル追加ページへ遷移
   const addSkillButtons = document.querySelectorAll('.add-skill-button');
-  console.log(addSkillButtons);
   addSkillButtons.forEach(button => {
     button.addEventListener('click', () => {
       const categoryId = button.getAttribute('data-category-id');
@@ -84,12 +82,14 @@
       button.addEventListener('click', function(event) {
         event.preventDefault(); // デフォルトのフォーム送信をキャンセル
 
-        const skillId = button.getAttribute('data-id');
-        console.log(skillId);
+        const skillId = button.closest('tr').getAttribute('data-skill-id');
+        console.log("data-id属性から取得したSkill ID:", skillId);
 
         // フォームのデータを取得
         const formData = new FormData(updateForm);
-        console.log(updateForm.action);
+        formData.append('skill_id', skillId)
+        // console.log(updateForm.action);
+        console.log('formDataで取得したSkill ID:', skillId);
 
         // Ajaxリクエストで更新処理を非同期で実行
         fetch(updateForm.action, {
@@ -99,7 +99,10 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            showModal(data.message);
+            const skillName = data.skill_name;
+            const skillLevel = data.skill_level;
+
+            showModal(skillName);
           }
         })
         .catch(error => {

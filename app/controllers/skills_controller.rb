@@ -10,9 +10,8 @@ class SkillsController < ApplicationController
     @skill.user = current_user
 
     if @skill.save
-      @show_modal = true
       @modal_message = "#{@category.name}に#{@skill.name}を習得レベル#{@skill.skill_level}で追加しました!"
-      redirect_to edit_category_skill_path(@category, @skill)
+      # redirect_to edit_category_skill_path(@category, @skill)
     else
       render :new
     end
@@ -47,8 +46,10 @@ class SkillsController < ApplicationController
     @skill = Skill.find(params[:id])
     
     if @skill.update!(skill_params)
-      @success_update_message = "#{@skill.name}の習得レベルを保存しました！"
-      render json: { success: true, message: @success_update_message, skill: @skill.attributes }
+      skill_name = @skill.name
+      skill_level = @skill.skill_level
+      # @success_update_message = "#{@skill.name}の習得レベルを保存しました！"
+      render json: { success: true, skill_name: skill_name, skill_level: skill_level }
     else
       @error_update_message = "保存に失敗しました。"
       render json: { success: false, message: @error_update_message, errors: @skill.errors.full_messages }
