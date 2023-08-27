@@ -3,32 +3,49 @@ class UsersController < ApplicationController
     before_action :check_login, except: [:show, :edit, :update, :destroy]
 
     def index
-      @user = current_user
-      @users = User.all
-      @skills = Skill.all
-      @categories = Category.all
-      @data = {}
+      if user_signed_in?
+        @user = current_user
+        @users = User.all
+        @skills = Skill.all
+        @categories = Category.all
+        @data = {}
 
-      @categories.each do |category|
-        skills = Skill.where(category_id: category.id)
-        monthly_skill_levels = {
-          "先々月" => skills.where(updated_at: 3.months.ago.beginning_of_month..2.months.ago.end_of_month).sum(:skill_level),
-          "先月" => skills.where(updated_at: 2.months.ago.beginning_of_month..1.month.ago.end_of_month).sum(:skill_level),
-          "今月" => skills.where(updated_at: 1.month.ago.beginning_of_month..Time.current.end_of_month).sum(:skill_level)
-        }
+        @categories.each do |category|
+          skills = Skill.where(category_id: category.id)
+          monthly_skill_levels = {
+            "先々月" => skills.where(updated_at: 3.months.ago.beginning_of_month..2.months.ago.end_of_month).sum(:skill_level),
+            "先月" => skills.where(updated_at: 2.months.ago.beginning_of_month..1.month.ago.end_of_month).sum(:skill_level),
+            "今月" => skills.where(updated_at: 1.month.ago.beginning_of_month..Time.current.end_of_month).sum(:skill_level)
+          }
 
-        @data[category.name] = monthly_skill_levels
+          @data[category.name] = monthly_skill_levels
+        end
+      else
+        redirect_to new_user_session_path
       end
     end
 
-    def edit
+    def show
       @user = current_user
+      render :edit
+    end
+
+    def edit
+      if user_signed_in?
+        @user = current_user
+      else
+        redirect_to new_user_session_path
+      end
     end
 
     def update
       @user = User.find(params[:id])
-      if @user.update!(user_params)
+      puts params
+      if @user.update(user_params)
         redirect_to root_path
+      else
+        @errors = @user.errors.full_messages
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -43,4 +60,6 @@ class UsersController < ApplicationController
         redirect_to new_user_session_path, alert: "ログインしてください"
       end
     end
+
+
 end
