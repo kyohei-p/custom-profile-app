@@ -1,29 +1,35 @@
-<div class="login-container">
+<div class="login-container" data-turbo="false">
   <h2>ログイン</h2>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { "data-turbo": "false" }) do |f| %>
-    <div class="field" style="margin-top: 30px; text-align: left;" data-turbo="false">
-      <%= label_tag :email, "メールアドレス", style: "color: gray; font-size: 0.75rem;" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
-      <% if @user.errors[:email].any? %>
+    <div class="field" data-turbo="false">
+      <%= label_tag :email, "メールアドレス", class:"label-tag" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"login-field" %>
+      <% if resource.errors[:email].any? %>
         <div class="error" data-turbo="false">
-          <%= @user.errors[:email].join(", ") %>
-          <%= debug @user.errors %>
+          <% flash[:alert] ||= []%>
+          <% flash[:alert] << resource.errors[:email].join(", ") %>
         </div>
       <% end %>
     </div>
 
-    <div class="field" style="margin-top: 30px; text-align: left;" data-turbo="false">
-      <%= label_tag :password, "パスワード", style: "color: gray; font-size: 0.75rem;" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", style: "border: none; border-bottom: 2px solid #ccc; width: 320px;" %>
-      <% if @user.errors[:password].any? %>
+    <div class="field" data-turbo="false">
+      <%= label_tag :password, "パスワード", class:"label-tag" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: "login-field" %>
+      <% if resource.errors[:password].any? %>
         <div class="error" data-turbo="false">
-          <%= @user.errors[:password].join(", ") %>
+          <% flash[:alert] ||= []%>
+          <% flash[:alert] << resource.errors[:password].join(", ") %>
         </div>
       <% end %>
     </div>
 
     <div class="actions" style="margin-top: 30px;" data-turbo="false">
-      <%= f.submit "ログインする", style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
+      <%= f.submit "ログインする", class: "submit-button" %>
     </div>
   <% end %>
 </div>

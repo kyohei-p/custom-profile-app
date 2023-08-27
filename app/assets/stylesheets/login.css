@@ -3,3 +3,9 @@
   max-width: 300px;
   margin: 0 auto;
 }
+
+.login-field {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  width: 320px;
+}

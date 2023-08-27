@@ -2,14 +2,21 @@ ja:
   activerecord:
     attributes:
       user:
+        email: "メールアドレス"
+        password: "パスワード"
         self_introduction: "自己紹介文"
     errors:
       models:
         user:
           attributes:
+            email:
+              blank: "メールアドレスを入力してください。"
+              invalid: "正しいメールアドレスの形式で入力してください。"
+            password:
+              blank: "パスワードを入力してください。"
             self_introduction:
               blank: "自己紹介文を入力してください"
-              too_short: "50文字以上、200文字未満で入力してください"              
+              too_short: "50文字以上、200文字未満で入力してください"
               too_long: "200文字未満で入力してください"
         skill:
           attributes:
