@@ -29,8 +29,12 @@ class SkillsController < ApplicationController
   end
 
   def new
-    @category = Category.find(params[:category_id])
-    @skill = @category.skills.build
+    if user_signed_in?
+      @category = Category.find(params[:category_id])
+      @skill = @category.skills.build
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def update

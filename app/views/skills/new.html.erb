@@ -1,27 +1,20 @@
-<% if user_signed_in? %>
-  <div class="addskill-container" style="text-align:center; max-width: 300px; margin: 0 auto;">
-    <h2 style="font-weight: normal; text-align:center; white-space: nowrap;"><%= @category.name %>にスキルを追加</h2>
-    <%= form_with(model: @category.skills.build, url: category_skills_path(@category)) do |f| %>
-      <div class="field" style="margin-top: 30px; text-align: left;">
-          <%= label_tag :name, "習得スキル名", style: "color: gray; font-size: 0.75rem;" %><br />
-          <%= f.text_field :name, autocomplete: "name", style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px; width: 125px;" %><br />
-          <% if @skill.errors.has_key?(:name) %>
-            <p class="error-message"><%= @skill.errors[:name].first %></p>
-          <% end %>
-          <%= label_tag :skill_level, "習得レベル", style: "color: gray; font-size: 0.75rem;" %><br />
-          <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { style: "border: none; border-bottom: 2px solid #ccc; margin-bottom: 30px; padding-right: 180px;"} %><br />
-          <% if @skill.errors.has_key?(:skill_level) %>
-            <p class="error-message"><%= @skill.errors[:skill_level].first %></p>
-          <% end %>
-      </div>
-      <div class="actions"style="margin-top: 10px;">
-        <%= f.submit "スキルを追加する", data: { turbolinks: false }, style: "border: none; border-radius: 5px; padding: 10px 50px; background-color: #00608d; color: white;" %>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <div class="please-login" style="text-align:center;">
-    <p>ログインしてください</p>
-    <%= link_to "ログイン", new_user_session_path %>
-  </div>
-<% end %>
+<div class="addskill-container">
+  <h2 class="addskill-h2"><%= @category.name %>にスキルを追加</h2>
+  <%= form_with(model: @category.skills.build, url: category_skills_path(@category)) do |f| %>
+    <div class="field">
+        <%= label_tag :name, "習得スキル名", class:"label-tag" %><br />
+        <%= f.text_field :name, autocomplete: "name", class:"addskill-text-field" %><br />
+        <% if @skill.errors.has_key?(:name) %>
+          <p class="error-message"><%= @skill.errors[:name].first %></p>
+        <% end %>
+        <%= label_tag :skill_level, "習得レベル", class:"label-tag" %><br />
+        <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { class:"addskill-text-field"} %><br />
+        <% if @skill.errors.has_key?(:skill_level) %>
+          <p class="error-message"><%= @skill.errors[:skill_level].first %></p>
+        <% end %>
+    </div>
+    <div class="addskill-actions">
+      <%= f.submit "スキルを追加する", data: { turbolinks: false }, class:"submit-button" %>
+    </div>
+  <% end %>
+</div>
