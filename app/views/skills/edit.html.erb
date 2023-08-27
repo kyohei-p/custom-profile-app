@@ -1,23 +1,29 @@
-<div class="skill-container">
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <p class="modal-text" id="modalMessage"></p>
-        <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
-      </div>
-    </div>
-
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <p class="modal-text" id="modalMessage"></p>
+    <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
+  </div>
+</div>
+<div class="categories-container">
   <% @categories.each do |category| %>
-    <%= category.name %>
-    <div class="add-button">
-      <button class="add-skill-button" data-category-id="<%= category.id %>"
-      data-turbo="false">スキルを追加する</button>
-    </div>
-    <div class="skill-list">
+    <div class="category-container category-<%= category.id %>">
+      <div class="category-area-and-button">
+        <div class="category-area">
+          <p class="category-name"><%= category.name %></p>
+          <hr class="underline">
+        </div>
+        <div class="add-button">
+          <button class="add-skill-button" data-category-id="<%= category.id %>"
+          data-turbo="false">スキルを追加する</button>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
             <th>習得スキル</th>
             <th>習得レベル</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -25,7 +31,10 @@
             <tr data-id=<%= skill.id %>>
               <td><%= skill.name %></td>
               <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form", data: { turbo: false, turbolinks: false } do %>
-                <td><%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %></td>
+                <td>
+                  <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %>
+                  <span class="triangle-arrow"></span>
+                </td>
                 <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { turbolinks: false } %></td>
               <% end %>
               <td>

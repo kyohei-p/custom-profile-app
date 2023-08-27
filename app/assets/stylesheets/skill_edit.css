@@ -1,4 +1,33 @@
+.categories-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 50px auto;
+}
+
+.category-container {
+  margin: 0 auto 50px;
+  padding: 50px;
+}
+
+.category-1, .category-2, .category-3 {
+  border: 1px solid #929292;
+  border-radius: 5px;
+}
+
+.category-area-and-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-name {
+  margin: auto;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .add-skill-button, #backButton {
+  height: 50px;
   border: none;
   border-radius: 5px;
   padding: 10px 50px;
@@ -10,24 +39,88 @@
   margin: 10px auto 20px;
 }
 
+table, th, td {
+  padding: 8px;
+}
+
+table {
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  padding-right: 50px;
+  text-align: left;
+  font-weight: normal;
+}
+
+td {
+  position: relative;
+  padding-right: 50px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.skill-level-tag {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 150px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.triangle-arrow {
+  position: relative;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.triangle-arrow::before {
+  content: "";
+  position: absolute;
+  top: -37px;
+  left: 120px;
+  transform: translateY(-50%) rotate(180deg);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #757575;
+}
+
+/* エスケープシーケンス&#9660;を使用した場合 */
+/* .triangle-arrow {
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1;
+} */
+
+.update-forms {
+  display:flex;
+}
+
 .update-button {
+  width: 180px;
   border: 1px solid #00608d;
   border-radius: 5px;
   padding: 5px 10px;
-  height: fit-content;
   background-color: white;
   color: #00608d;
 }
 
 .delete-button {
-  border: 1px solid #ff0000;
+  width: 150px;
+  border: 1px solid #ee6969;
   border-radius: 5px;
   padding: 5px 10px;
-  background-color:
-  white; color: #ff0000
-}
-
-.skill-level-tag {
-  border: 1px solid #ccc;
-  padding: 0 5px;
+  background-color:#ee6969;
+  color: #ffffff;
 }
