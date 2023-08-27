@@ -1,8 +1,17 @@
+html {
+  position: relative;
+}
+
 body{
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .content{
+  flex: 1;
   margin: 160px 50px 50px;
 }
 
@@ -12,6 +21,7 @@ header {
   padding: 30px;
   position: fixed;
   top: 0;
+  z-index: 99;
 }
 
 .nav-container {
@@ -59,15 +69,22 @@ header {
 }
 
 footer {
-  background-color: #00608d;
-  width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: 0;
+  width: 100%;
+  }
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: #00608d;
 }
 
 .copyright {
+  text-align: center;
   color:white;
-  text-align:center;
 }
 
 
@@ -94,7 +111,7 @@ h2{
 }
 
 .underline {
-  border: 1.5px solid #ccc;
+  border: 1px solid #7f7f7f;
   margin: 10px auto 30px 0;
   width: 200px;
 }
