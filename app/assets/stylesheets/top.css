@@ -1,0 +1,32 @@
+.main-container {
+  margin: 50px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+}
+
+.profile-image {
+  border-radius: 50%;
+  border: 0.5px solid #ccc;
+}
+
+.introduction-container {
+  flex: 1;
+  text-align: left;
+}
+
+.introduction-h2 {
+  margin-bottom: 0;
+}
+
+.introduction-text {
+  padding-right: 100px;
+}

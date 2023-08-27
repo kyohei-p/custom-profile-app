@@ -1,0 +1,22 @@
+.addskill-container {
+  text-align:center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.addskill-h2 {
+  font-weight: normal;
+  text-align:center;
+  white-space: nowrap;
+}
+
+.addskill-text-field {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 30px;
+  width: 300px;
+}
+
+.addskill-actions {
+  margin-top: 10px;
+}
