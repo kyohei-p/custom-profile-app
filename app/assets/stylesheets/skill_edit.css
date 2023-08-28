@@ -8,6 +8,14 @@
 .category-container {
   margin: 0 auto 50px;
   padding: 50px;
+  max-height: 300px; /* 例として300pxに設定 */
+
+  /* スクロールバーを表示 */
+  overflow-y: auto;
+}
+
+.scrollable {
+  overflow-y: scroll;
 }
 
 .category-1, .category-2, .category-3 {

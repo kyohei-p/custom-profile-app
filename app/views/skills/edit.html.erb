@@ -154,4 +154,14 @@
   //   });
   // });
 
+//カテゴリ内のスキルテーブルのスクロール機能
+$(document).ready(function() {
+  $('.category-container').each(function() {
+    var skillsCount = $(this).find('tbody tr').length;
+    if (skillsCount > 3) {
+      $(this).addClass('scrollable');
+    }
+  });
+});
+
 </script>
