@@ -225,6 +225,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -288,6 +290,7 @@ DEPENDENCIES
   rails (~> 7.0.6)
   rails-i18n
   rspec-rails
+  sassc
   selenium-webdriver
   sprockets-rails
   stimulus-rails

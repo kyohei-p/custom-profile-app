@@ -28,7 +28,7 @@
         </thead>
         <tbody>
           <% category.skills.each do |skill| %>
-            <tr data-skill-id=<%= skill.id %>>
+            <tr data-category-id="<%= category.id %>" data-skill-id="<%= skill.id %>" data-skill-name="<%= skill.name %>" data-skill-level="<%= skill.skill_level %>">
               <td><%= skill.name %></td>
               <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form", data: { turbo: false, turbolinks: false } do %>
                 <td>
@@ -56,6 +56,7 @@
   function showModal(skillName) {
     const modal = document.getElementById('myModal');
     const modalMessage = modal.querySelector('#modalMessage');
+    console.log('モーダルへ送られてきたSkill Name:', skillName);
 
     const fullMessage = `${skillName}のスキルレベルを保存しました!`;
     modalMessage.textContent = fullMessage;
@@ -82,25 +83,39 @@
       button.addEventListener('click', function(event) {
         event.preventDefault(); // デフォルトのフォーム送信をキャンセル
 
+        const categoryId = button.closest('tr').getAttribute('data-category-id');
         const skillId = button.closest('tr').getAttribute('data-skill-id');
-        console.log("data-id属性から取得したSkill ID:", skillId);
+        const skillName = button.closest('tr').getAttribute('data-skill-name');
+        const skillLevel = button.closest('tr').getAttribute('data-skill-level');
+        // console.log("data-id属性から取得したSkill ID:", skillId);
 
         // フォームのデータを取得
         const formData = new FormData(updateForm);
-        formData.append('skill_id', skillId)
+        formData.append('category_id', categoryId);
+        console.log('フロントからのcategory_id', categoryId);
+        formData.append('skill_id', skillId);
+        console.log('フロントからのskill_id', skillId);
+        formData.append('skill_name', skillName);
+        console.log('フロントからのskill_name', skillName);
+        formData.append('skill_level', skillLevel);
+        console.log('フロントからのskill_level', skillLevel);
+        console.log(formData);
         // console.log(updateForm.action);
-        console.log('formDataで取得したSkill ID:', skillId);
+        // console.log('formDataで取得したSkill ID:', skillId);
+        //  formData.append('_method', 'PATCH');
 
         // Ajaxリクエストで更新処理を非同期で実行
         fetch(updateForm.action, {
-          method: 'POST',
+          method: 'PATCH',
           body: formData
         })
         .then(response => response.json())
         .then(data => {
           if (data.success) {
             const skillName = data.skill_name;
+            console.log('バックエンドからのskillName', skillName);
             const skillLevel = data.skill_level;
+            console.log('バックエンドからのskillLevel', skillLevel);
 
             showModal(skillName);
           }
@@ -112,31 +127,31 @@
     });
   });
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const deleteForm = document.getElementById('delete-form');
-    // フォームのデータを削除
-    deleteForm.addEventListener('submit', function(event) {
-      event.preventDefault(); // デフォルトのフォーム送信をキャンセル
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   const deleteForm = document.getElementById('delete-form');
+  //   // フォームのデータを削除
+  //   deleteForm.addEventListener('submit', function(event) {
+  //     event.preventDefault(); // デフォルトのフォーム送信をキャンセル
 
-      // フォームのデータを取得
-      const formData = new FormData(deleteForm);
-      console.log(deleteForm.action);
+  //     // フォームのデータを取得
+  //     const formData = new FormData(deleteForm);
+  //     console.log(deleteForm.action);
 
-      // Ajaxリクエストで更新処理を非同期で実行
-      fetch(deleteForm.action, {
-        method: 'DELETE',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showModal(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    });
-  });
+  //     // Ajaxリクエストで更新処理を非同期で実行
+  //     fetch(deleteForm.action, {
+  //       method: 'DELETE',
+  //       body: formData
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.success) {
+  //         showModal(data.message);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  //   });
+  // });
 
 </script>
