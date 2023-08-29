@@ -21,7 +21,6 @@ class SkillsController < ApplicationController
     if user_signed_in?
       @category = Category.find(params[:category_id])
       @skill = Skill.with_deleted.find_by(id: params[:id])
-      # @skill = Skill.find(params[:id])
       @categories = Category.all
       @skills = Skill.all
 
@@ -41,17 +40,12 @@ class SkillsController < ApplicationController
   end
 
   def update
-    Rails.logger.debug "----------"
-    Rails.logger.debug skill_params
-    Rails.logger.debug "----------"
     # @category = Category.find(params[:category_id])
     @skill = Skill.find(params[:skill_id])
-    # @skill = Skill.find(params[:skill_level])
     
     if @skill.update!({"skill_level"=> params[:skill_level]})
       skill_name = @skill.name
       skill_level = @skill.skill_level
-      # @success_update_message = "#{@skill.name}の習得レベルを保存しました！"
       render json: { success: true, skill_name: skill_name, skill_level: skill_level }
     else
       @error_update_message = "保存に失敗しました。"
@@ -60,12 +54,12 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:category_id])
-    @skill = Skill.find(params[:id])
+    # @category = Category.find(params[:category_id])
+    @skill = Skill.find(params[:skill_id])
     if @skill.user_id == current_user.id
       @skill.destroy
-      @success_delete_message = "#{@skill.name}の項目を削除しました！"
-      render json: { success: true, message: @success_delete_message, skill: @skill.attributes }
+      skill_name = @skill.name
+      render json: { success: true,  skill_name: skill_name }
     else
       @error_delete_message = "削除に失敗しました。"
       render json: { success: false, message: @error_delete_message, errors: @skill.errors.full_messages }

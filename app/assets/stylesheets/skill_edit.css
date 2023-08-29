@@ -61,6 +61,7 @@ table {
 
 th {
   padding-right: 50px;
+  white-space: nowrap;
   text-align: left;
   font-weight: normal;
 }
@@ -118,7 +119,7 @@ td {
   z-index: 1;
 } */
 
-.update-forms {
+#update-form, #delete-form {
   display:flex;
 }
 

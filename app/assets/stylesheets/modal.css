@@ -13,7 +13,7 @@
   /* モーダルのコンテンツスタイル */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 20% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -21,6 +21,12 @@
     text-align: center;
     /* border-radius: 5px; */
     position: relative;
+  }
+
+  @media screen and (max-width: 1164px) {
+    .modal-content {
+      margin: 30% auto;
+    }
   }
 
   .modal-text {
