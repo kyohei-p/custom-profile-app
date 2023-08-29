@@ -41,11 +41,14 @@ class SkillsController < ApplicationController
   end
 
   def update
-    puts params
-    @category = Category.find(params[:category_id])
-    @skill = Skill.find(params[:id])
+    Rails.logger.debug "----------"
+    Rails.logger.debug skill_params
+    Rails.logger.debug "----------"
+    # @category = Category.find(params[:category_id])
+    @skill = Skill.find(params[:skill_id])
+    # @skill = Skill.find(params[:skill_level])
     
-    if @skill.update!(skill_params)
+    if @skill.update!({"skill_level"=> params[:skill_level]})
       skill_name = @skill.name
       skill_level = @skill.skill_level
       # @success_update_message = "#{@skill.name}の習得レベルを保存しました！"

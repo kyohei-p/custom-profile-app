@@ -32,7 +32,7 @@
               <td><%= skill.name %></td>
               <%= form_tag category_skill_path(category, skill), method: :patch, style: "display:flex;" , id: "update-form", data: { turbo: false, turbolinks: false } do %>
                 <td>
-                  <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", data: { turbolinks: false } %>
+                  <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", id: "skill_id_" + skill.id.to_s, data: { turbolinks: false } %>
                   <span class="triangle-arrow"></span>
                 </td>
                 <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { id: @skill.id, turbolinks: false } %></td>
@@ -86,7 +86,7 @@
         const categoryId = button.closest('tr').getAttribute('data-category-id');
         const skillId = button.closest('tr').getAttribute('data-skill-id');
         const skillName = button.closest('tr').getAttribute('data-skill-name');
-        const skillLevel = button.closest('tr').getAttribute('data-skill-level');
+        const skillLevel = document.getElementById('skill_id_' + skillId).value;
         // console.log("data-id属性から取得したSkill ID:", skillId);
 
         // フォームのデータを取得
