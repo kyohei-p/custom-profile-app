@@ -1,7 +1,7 @@
 <div id="myModal" class="modal">
   <div class="modal-content">
     <p class="modal-text" id="modalMessage"></p>
-    <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
+    <%= button_to "スキル編集ページに戻る", edit_category_skill_path(@category, @skill), method: :get, data: { turbo: false, turbolinks: false }, class: "back-button" %>
   </div>
 </div>
 <div class="categories-container">

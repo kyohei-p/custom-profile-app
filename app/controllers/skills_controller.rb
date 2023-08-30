@@ -17,8 +17,9 @@ class SkillsController < ApplicationController
         category_name = @category.name
         skill_name = @skill.name
         skill_level = @skill.skill_level
-        render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level }
-        # redirect_to edit_category_skill_path(@category, @skill)
+        @newly_created_skill = @skill
+        newly_created_skill_id = @newly_created_skill.id
+        render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level, skill_id: newly_created_skill_id, category_id: @category.id }
       else
         render json: { success: false, errors: @skill.errors.full_messages }
       end
@@ -50,7 +51,6 @@ class SkillsController < ApplicationController
   end
 
   def update
-    # @category = Category.find(params[:category_id])
     @skill = Skill.find(params[:skill_id])
     
     if @skill.update!({"skill_level"=> params[:skill_level]})
@@ -64,7 +64,6 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    # @category = Category.find(params[:category_id])
     @skill = Skill.find(params[:skill_id])
     if @skill.user_id == current_user.id
       @skill.destroy

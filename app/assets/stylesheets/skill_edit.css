@@ -34,7 +34,7 @@
   font-size: 20px;
 }
 
-.add-skill-button, #backButton {
+.add-skill-button, .back-button{
   height: 50px;
   border: none;
   border-radius: 5px;
@@ -43,7 +43,7 @@
   color: white;
 }
 
-#backButton {
+.back-button {
   margin: 10px auto 20px;
 }
 

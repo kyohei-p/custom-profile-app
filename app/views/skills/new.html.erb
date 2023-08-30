@@ -1,7 +1,10 @@
 <div id="myModal" class="modal">
   <div class="modal-content">
     <p class="modal-text" id="modalMessage"></p>
-    <%= button_to "スキル編集ページに戻る", method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
+      <button class="back-button" data-turbo="false" data-turbolinks="false"
+      data-category-id="<%= @category.id %>"
+      data-skill-id="<span id='temporary-skill-id'></span>"
+            >スキル編集ページに戻る</button>
   </div>
 </div>
 <div class="addskill-container">
@@ -32,15 +35,33 @@
     const modalMessage = modal.querySelector('#modalMessage');
     console.log('モーダルへ送られてきた', categoryName, skillName, skillLevel);
 
-    const fullMessage = `${categoryName}名に${skillName}を習得レベル${skillLevel}で追加しました!`;
+    const fullMessage = `${categoryName}に${skillName}を習得レベル${skillLevel}で追加しました!`;
     modalMessage.textContent = fullMessage;
 
     modal.style.display = 'block';
+
+    //一時的なID
+    const temporarySkillId = document.getElementById('temporary-skill-id');
+    temporarySkillId.textContent = data.skill_id; // 新しいスキルのIDを設定
+    console.log('skillId', temporarySkillId.textContent);
   }
+
+    // スキル編集ページへ戻るボタンのクリックイベント
+    document.addEventListener("DOMContentLoaded", function() {
+      const backButton = document.querySelector(".back-button");
+
+      backButton.addEventListener("click", function() {
+        const categoryId = backButton.getAttribute("data-category-id");
+        const skillId = backButton.getAttribute("data-skill-id");
+        const editUrl = `http://localhost:3000/categories/${categoryId}/skills/${skillId}/edit`;
+
+        window.location.href = editUrl;
+      });
+    });
+
 
   //スキルのCreate処理
   document.addEventListener('DOMContentLoaded', function() {
-    // const updateForm = document.getElementById('update-form');
     const addSkillButtons = document.querySelectorAll('.submit-button');
 
     //submit-buttonのクリックイベント
@@ -87,6 +108,13 @@
             console.log('バックエンドからのskillName', skillName);
             const skillLevel = data.skill_level;
             console.log('バックエンドからのskillLevel', skillLevel);
+
+            //編集ページへ戻る時のIDを取得
+            const backButton = document.querySelector(".back-button");
+            backButton.setAttribute("data-category-id", data.category_id);
+            backButton.setAttribute("data-skill-id", data.skill_id);
+            console.log('編集ページへ戻る時のcategory_id', data.category_id);
+            console.log('編集ページへ戻る時のskill_id', data.skill_id);
 
             addSkillModal(categoryName, skillName, skillLevel);
           }
