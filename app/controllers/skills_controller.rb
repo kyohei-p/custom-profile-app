@@ -2,28 +2,28 @@ class SkillsController < ApplicationController
   before_action :set_category_ids, only: [:edit, :new]
 
   def index
+    @category = Category.find(params[:category_id])
+    @skill = Skill.new
+    render :new
   end
 
   def create
-    puts "======"
-    puts params
-    puts "======"
-    @category = Category.find(params[:category_id])
-    @skill = @category.skills.build(skill_params)
-    @skill.user = current_user
+    if user_signed_in?
+      @category = Category.find(params[:category_id])
+      @skill = @category.skills.build(skill_params)
+      @skill.user = current_user
 
-    if @skill.save
-      binding.pry
-      puts params[:category_id]
-      puts params[:skill_name]
-      puts params[:skill_level]
-      category_name = @category.name
-      skill_name = @skill.name
-      skill_level = @skill.skill_level
-      render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level }
-      # redirect_to edit_category_skill_path(@category, @skill)
+      if @skill.save
+        category_name = @category.name
+        skill_name = @skill.name
+        skill_level = @skill.skill_level
+        render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level }
+        # redirect_to edit_category_skill_path(@category, @skill)
+      else
+        render json: { success: false, errors: @skill.errors.full_messages }
+      end
     else
-      render json: { success: false, errors: @skill.errors.full_messages }
+      redirect_to new_user_session_path
     end
   end
 

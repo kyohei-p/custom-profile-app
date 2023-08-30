@@ -1,8 +1,9 @@
 class Skill < ApplicationRecord
-    belongs_to :category
-    belongs_to :user
+  belongs_to :category
+  belongs_to :user
 
-    acts_as_paranoid
+  acts_as_paranoid
 
-    validates :name, presence: true, length: { maximum: 255 }
+  validates :name, presence: true, length: { maximum: 255 }
+  validates :skill_level, presence: true
 end
