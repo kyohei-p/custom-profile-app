@@ -1,20 +1,100 @@
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <p class="modal-text" id="modalMessage"></p>
+    <%= button_to "スキル編集ページに戻る", method: :get, data: { turbo: false, turbolinks: false }, id: "backButton" %>
+  </div>
+</div>
 <div class="addskill-container">
   <h2 class="addskill-h2"><%= @category.name %>にスキルを追加</h2>
   <%= form_with(model: @category.skills.build, url: category_skills_path(@category)) do |f| %>
     <div class="field" data-turbo="false" data-turbolinks="false">
         <%= label_tag :name, "習得スキル名", class:"label-tag" %><br />
-        <%= f.text_field :name, autocomplete: "name", class:"addskill-text-field" %><br />
+        <%= f.text_field :name, autocomplete: "name", id: "skill-name", class:"addskill-text-field" %><br />
         <% if @skill.errors.has_key?(:name) %>
           <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:name].first %></p>
         <% end %>
         <%= label_tag :skill_level, "習得レベル", class:"label-tag" %><br />
-        <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { class:"addskill-text-field"} %><br />
+        <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { id: "skill-level", class:"addskill-text-field"} %><br />
         <% if @skill.errors.has_key?(:skill_level) %>
           <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:skill_level].first %></p>
         <% end %>
     </div>
-    <div class="addskill-actions">
+    <div class="addskill-actions" data-category-id="<%= @category.id %>">
       <%= f.submit "スキルを追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
     </div>
   <% end %>
 </div>
+
+<script>
+  //モーダルの表示
+  function addSkillModal(categoryName, skillName, skillLevel) {
+    const modal = document.getElementById('myModal');
+    const modalMessage = modal.querySelector('#modalMessage');
+    console.log('モーダルへ送られてきた', categoryName, skillName, skillLevel);
+
+    const fullMessage = `${categoryName}名に${skillName}を習得レベル${skillLevel}で追加しました!`;
+    modalMessage.textContent = fullMessage;
+
+    modal.style.display = 'block';
+  }
+
+  //スキルのCreate処理
+  document.addEventListener('DOMContentLoaded', function() {
+    // const updateForm = document.getElementById('update-form');
+    const addSkillButtons = document.querySelectorAll('.submit-button');
+
+    //submit-buttonのクリックイベント
+    addSkillButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // デフォルトのフォーム送信をキャンセル
+
+        const categoryId = button.closest('.addskill-actions').getAttribute('data-category-id');
+        const addSkillActions = button.closest('.addskill-actions');
+
+        const skillForm = addSkillActions.closest('form');
+        console.log(skillForm);
+        const skillNameInput = skillForm.querySelector('#skill-name');
+        const skillLevelSelect = skillForm.querySelector('#skill-level');
+
+        const categoryName = categoryId.value;
+        const skillName = skillNameInput.value;
+        const skillLevel = skillLevelSelect.value;
+
+        // CSRFトークンの取得
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // ヘッダーにCSRFトークンを設定
+        const headers = new Headers({ 'X-CSRF-Token': csrfToken });
+
+        // フォームのデータを取得
+        const formData = new FormData();
+        formData.append('category_id', categoryId);
+        formData.append('skill[name]', skillName);
+        formData.append('skill[skill_level]', skillLevel);
+        console.log(formData);
+
+        // fetchを使った非同期の登録処理
+        fetch(skillForm.action, {
+          method: 'POST',
+          headers: headers,
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const categoryName = data.category_name;
+            console.log('バックエンドからのcategoryName', categoryName);
+            const skillName = data.skill_name;
+            console.log('バックエンドからのskillName', skillName);
+            const skillLevel = data.skill_level;
+            console.log('バックエンドからのskillLevel', skillLevel);
+
+            addSkillModal(categoryName, skillName, skillLevel);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      });
+    });
+  });
+</script>

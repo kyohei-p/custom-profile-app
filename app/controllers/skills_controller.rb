@@ -5,15 +5,25 @@ class SkillsController < ApplicationController
   end
 
   def create
+    puts "======"
+    puts params
+    puts "======"
     @category = Category.find(params[:category_id])
     @skill = @category.skills.build(skill_params)
     @skill.user = current_user
 
     if @skill.save
-      @modal_message = "#{@category.name}に#{@skill.name}を習得レベル#{@skill.skill_level}で追加しました!"
+      binding.pry
+      puts params[:category_id]
+      puts params[:skill_name]
+      puts params[:skill_level]
+      category_name = @category.name
+      skill_name = @skill.name
+      skill_level = @skill.skill_level
+      render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level }
       # redirect_to edit_category_skill_path(@category, @skill)
     else
-      render :new
+      render json: { success: false, errors: @skill.errors.full_messages }
     end
   end
 
