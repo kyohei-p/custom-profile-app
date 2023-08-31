@@ -40,7 +40,7 @@
                     <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", id: "skill_id_" + skill.id.to_s, data: { turbolinks: false } %>
                     <span class="triangle-arrow"></span>
                   </td>
-                  <td><%= submit_tag "習得レベルを保存する", class: "update-button", data: { id: @skill.id, turbolinks: false } %></td>
+                  <td><%= submit_tag "習得レベルを更新する", class: "update-button", data: { id: @skill.id, turbolinks: false } %></td>
                 <% end %>
                 <td>
                   <%= form_tag category_skill_path(category, skill), method: :delete, id: "delete-form", data: { turbo: false, turbolinks: false } do %>
@@ -64,7 +64,7 @@
     const modalMessage = modal.querySelector('#modalMessage');
     console.log('モーダルへ送られてきたSkill Name:', skillName);
 
-    const fullMessage = `${skillName}のスキルレベルを保存しました!`;
+    const fullMessage = `${skillName}のスキルレベルを更新しました!`;
     modalMessage.textContent = fullMessage;
 
     modal.style.display = 'block';
