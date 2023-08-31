@@ -13,14 +13,10 @@
     <div class="field" data-turbo="false" data-turbolinks="false">
         <%= label_tag :name, "習得スキル名", class:"label-tag" %><br />
         <%= f.text_field :name, autocomplete: "name", id: "skill-name", class:"addskill-text-field" %><br />
-        <% if @skill.errors.has_key?(:name) %>
-          <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:name].first %></p>
-        <% end %>
+        <p class="error-message" data-turbo="false" data-turbolinks="false"></p>
         <%= label_tag :skill_level, "習得レベル", class:"label-tag" %><br />
         <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { id: "skill-level", class:"addskill-text-field"} %><br />
-        <% if @skill.errors.has_key?(:skill_level) %>
-          <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:skill_level].first %></p>
-        <% end %>
+        <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:skill_level].first %></p>
     </div>
     <div class="addskill-actions" data-category-id="<%= @category.id %>">
       <%= f.submit "スキルを追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
@@ -117,6 +113,12 @@
             console.log('編集ページへ戻る時のskill_id', data.skill_id);
 
             addSkillModal(categoryName, skillName, skillLevel);
+          } else {
+            const errorMessages = data.errors.join(', ');
+            console.error('エラーメッセージ:', errorMessages);
+
+            const errorElement = document.querySelector('.error-message');
+            errorElement.textContent = errorMessages;
           }
         })
         .catch(error => {
