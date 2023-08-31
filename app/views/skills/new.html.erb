@@ -2,9 +2,10 @@
   <div class="modal-content">
     <p class="modal-text" id="modalMessage"></p>
       <button class="back-button" data-turbo="false" data-turbolinks="false"
-      data-category-id="<%= @category.id %>"
-      data-skill-id="<span id='temporary-skill-id'></span>"
-            >スキル編集ページに戻る</button>
+        data-category-id="<%= @category.id %>"
+        data-skill-id="<span id='temporary-skill-id'></span>">
+        スキル編集ページに戻る
+      </button>
   </div>
 </div>
 <div class="addskill-container">
@@ -114,22 +115,27 @@
 
             addSkillModal(categoryName, skillName, skillLevel);
           } else {
-            //skill_nameフィールドのエラーメッセージ
+            console.log(data);
+            // skill_nameのエラーメッセージを取得
             const nameErrorElement = document.querySelector('.name-error-message');
-            nameErrorElement.textContent = document.querySelector('.name-error-message');
-            const nameErrors = data.errors.name || [];
+            const skillNameErrorMessage = data.errors.find(message => message.includes("Name")) || '';
 
-            //skill_levelフィールドのエラーメッセージ
+            const modifiedNameErrorMessage = skillNameErrorMessage.replace(/Name/g, '');
+            nameErrorElement.textContent = modifiedNameErrorMessage;
+            console.log(modifiedNameErrorMessage);
+
+            // skill_levelのエラーメッセージを取得
             const skillLevelErrorElement = document.querySelector('.skill-level-error-message');
-            skillLevelErrorElement.textContent = document.querySelector('.skill-level-error-message');
-            const skillLevelErrors = data.errors.skill_level || [];
+            const skillLevelErrorMessage = data.errors.find(message => message.includes("Skill level")) || '';
 
-            //全体のエラーメッセージ
-            // const errorMessages = data.errors.join(', ');
-            // console.error('エラーメッセージ:', errorMessages);
+            const modifiedskillLevelErrorMessage = skillLevelErrorMessage.replace(/Skill level/g, '');
+            skillLevelErrorElement.textContent = modifiedskillLevelErrorMessage;
+            console.log(modifiedskillLevelErrorMessage );
 
-            const errorElement = document.querySelector('.error-message');
-            errorElement.textContent = errorMessages;
+            //全てのエラーメッセージ
+            const errorMessages = data.errors.join(', ');
+            console.error('エラーメッセージ:', errorMessages);
+
           }
         })
         .catch(error => {
