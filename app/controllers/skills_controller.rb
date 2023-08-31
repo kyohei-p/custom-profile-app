@@ -14,11 +14,14 @@ class SkillsController < ApplicationController
       @skill.user = current_user
 
       if @skill.save
-        @show_modal = true
-        @modal_message = "#{@category.name}に#{@skill.name}を習得レベル#{@skill.skill_level}で追加しました!"
-        redirect_to edit_category_skill_path(@category, @skill)
+        category_name = @category.name
+        skill_name = @skill.name
+        skill_level = @skill.skill_level
+        @newly_created_skill = @skill
+        newly_created_skill_id = @newly_created_skill.id
+        render json: { success: true, category_name: category_name, skill_name: skill_name, skill_level: skill_level, skill_id: newly_created_skill_id, category_id: @category.id }
       else
-        render :new
+        render json: { success: false, errors: @skill.errors.full_messages }
       end
     else
       redirect_to new_user_session_path
@@ -29,7 +32,6 @@ class SkillsController < ApplicationController
     if user_signed_in?
       @category = Category.find(params[:category_id])
       @skill = Skill.with_deleted.find_by(id: params[:id])
-      # @skill = Skill.find(params[:id])
       @categories = Category.all
       @skills = Skill.all
 
@@ -49,23 +51,28 @@ class SkillsController < ApplicationController
   end
 
   def update
-    @category = Category.find(params[:category_id])
-    @skill = Skill.find(params[:id])
+    @skill = Skill.find(params[:skill_id])
     
-    if @skill.update!(skill_params)
-      redirect_to edit_category_skill_path(@category, @skill)
+    if @skill.update!({"skill_level"=> params[:skill_level]})
+      skill_name = @skill.name
+      skill_level = @skill.skill_level
+      render json: { success: true, skill_name: skill_name, skill_level: skill_level }
     else
-      render :edit
+      @error_update_message = "保存に失敗しました。"
+      render json: { success: false, message: @error_update_message, errors: @skill.errors.full_messages }
     end
   end
 
   def destroy
-    @category = Category.find(params[:category_id])
-    @skill = Skill.find(params[:id])
+    @skill = Skill.find(params[:skill_id])
     if @skill.user_id == current_user.id
       @skill.destroy
+      skill_name = @skill.name
+      render json: { success: true,  skill_name: skill_name }
+    else
+      @error_delete_message = "削除に失敗しました。"
+      render json: { success: false, message: @error_delete_message, errors: @skill.errors.full_messages }
     end
-    redirect_to edit_category_skill_path(@category, @skill)
   end
 
   private

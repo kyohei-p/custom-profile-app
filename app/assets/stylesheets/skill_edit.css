@@ -8,6 +8,14 @@
 .category-container {
   margin: 0 auto 50px;
   padding: 50px;
+  max-height: 300px; /* 例として300pxに設定 */
+
+  /* スクロールバーを表示 */
+  overflow-y: auto;
+}
+
+.scrollable {
+  overflow-y: scroll;
 }
 
 .category-1, .category-2, .category-3 {
@@ -26,7 +34,7 @@
   font-size: 20px;
 }
 
-.add-skill-button, #backButton {
+.add-skill-button, .back-button{
   height: 50px;
   border: none;
   border-radius: 5px;
@@ -35,7 +43,7 @@
   color: white;
 }
 
-#backButton {
+.back-button {
   margin: 10px auto 20px;
 }
 
@@ -53,6 +61,7 @@ table {
 
 th {
   padding-right: 50px;
+  white-space: nowrap;
   text-align: left;
   font-weight: normal;
 }
@@ -84,12 +93,19 @@ td {
 .triangle-arrow::before {
   content: "";
   position: absolute;
-  top: -37px;
-  left: 120px;
+  top: -4px;
+  right: 20px;
   transform: translateY(-50%) rotate(180deg);
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #757575;
+}
+
+@media screen and (max-width: 1164px) {
+  .triangle-arrow::before {
+    top: -38px;
+    right: -130px;
+  }
 }
 
 /* エスケープシーケンス&#9660;を使用した場合 */
@@ -103,7 +119,7 @@ td {
   z-index: 1;
 } */
 
-.update-forms {
+#update-form, #delete-form {
   display:flex;
 }
 
