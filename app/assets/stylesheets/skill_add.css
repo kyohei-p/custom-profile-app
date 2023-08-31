@@ -11,6 +11,9 @@
 }
 
 .addskill-text-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   border-bottom: 1px solid #ccc;
   margin-bottom: 15px;
@@ -19,4 +22,30 @@
 
 .addskill-actions {
   margin-top: 10px;
+}
+
+.triangle-arrow-addskill {
+  position: relative;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.triangle-arrow-addskill::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 280px;
+  transform: translateY(-50%) rotate(180deg);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #757575;
+}
+
+.skill-level-error-message {
+  width: max-content;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  color: red;
 }

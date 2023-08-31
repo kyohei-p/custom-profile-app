@@ -17,7 +17,8 @@
         <p class="error-message name-error-message" data-turbo="false" data-turbolinks="false"></p>
         <%= label_tag :skill_level, "習得レベル", class:"label-tag" %><br />
         <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { id: "skill-level", class:"addskill-text-field"} %><br />
-        <p class="error-message skill-level-error-message" data-turbo="false" data-turbolinks="false"></p>
+        <span class="triangle-arrow-addskill"></span>
+        <p class="skill-level-error-message" data-turbo="false" data-turbolinks="false"></p>
     </div>
     <div class="addskill-actions" data-category-id="<%= @category.id %>">
       <%= f.submit "スキルを追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
