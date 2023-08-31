@@ -13,10 +13,10 @@
     <div class="field" data-turbo="false" data-turbolinks="false">
         <%= label_tag :name, "習得スキル名", class:"label-tag" %><br />
         <%= f.text_field :name, autocomplete: "name", id: "skill-name", class:"addskill-text-field" %><br />
-        <p class="error-message" data-turbo="false" data-turbolinks="false"></p>
+        <p class="error-message name-error-message" data-turbo="false" data-turbolinks="false"></p>
         <%= label_tag :skill_level, "習得レベル", class:"label-tag" %><br />
         <%= f.select :skill_level, options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }), {}, { id: "skill-level", class:"addskill-text-field"} %><br />
-        <p class="error-message" data-turbo="false" data-turbolinks="false"><%= @skill.errors[:skill_level].first %></p>
+        <p class="error-message skill-level-error-message" data-turbo="false" data-turbolinks="false"></p>
     </div>
     <div class="addskill-actions" data-category-id="<%= @category.id %>">
       <%= f.submit "スキルを追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
@@ -114,8 +114,19 @@
 
             addSkillModal(categoryName, skillName, skillLevel);
           } else {
-            const errorMessages = data.errors.join(', ');
-            console.error('エラーメッセージ:', errorMessages);
+            //skill_nameフィールドのエラーメッセージ
+            const nameErrorElement = document.querySelector('.name-error-message');
+            nameErrorElement.textContent = document.querySelector('.name-error-message');
+            const nameErrors = data.errors.name || [];
+
+            //skill_levelフィールドのエラーメッセージ
+            const skillLevelErrorElement = document.querySelector('.skill-level-error-message');
+            skillLevelErrorElement.textContent = document.querySelector('.skill-level-error-message');
+            const skillLevelErrors = data.errors.skill_level || [];
+
+            //全体のエラーメッセージ
+            // const errorMessages = data.errors.join(', ');
+            // console.error('エラーメッセージ:', errorMessages);
 
             const errorElement = document.querySelector('.error-message');
             errorElement.textContent = errorMessages;
