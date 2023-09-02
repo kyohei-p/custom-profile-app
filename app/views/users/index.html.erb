@@ -34,45 +34,50 @@
 <script>
   document.addEventListener("DOMContentLoaded", function(){
     const ctx = document.getElementById('myChart');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['先々月', '先月', '今月'],
-        datasets:[
-          {
-            label: 'バックエンド',
-            data: [<%= @data["バックエンド"]["先々月"] || 0 %>, <%= @data["バックエンド"]["先月"] || 0 %>, <%= @data["バックエンド"]["今月"] || 0 %>],
-            backgroundColor: 'rgba(254, 178, 194, 0.7)',
-            borderColor: 'rgba(254, 178, 194, 1)',
-            borderWidth: 1
-          },
-          {
-            label: 'フロントエンド',
-            data: [<%= @data["フロントエンド"]["先々月"] || 0 %>, <%= @data["フロントエンド"]["先月"] || 0 %>, <%= @data["フロントエンド"]["今月"] || 0 %>],
-            backgroundColor: 'rgb(255, 207, 164, 0.7)',
-            borderColor: 'rgb(255, 207, 164, 1)',
-            borderWidth: 1
-          },
-          {
-            label: 'インフラ',
-            data: [<%= @data["インフラ"]["先々月"] || 0 %>, <%= @data["インフラ"]["先月"] || 0 %>, <%= @data["インフラ"]["今月"] || 0 %>],
-            backgroundColor: 'rgba(254, 229, 176, 0.7)',
-            borderColor: 'rgb(254, 229, 176, 1)',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 10,
-              min: 0
-            }
+    const chartData = {
+      labels: ['先々月', '先月', '今月'],
+      datasets:[
+        {
+          label: 'バックエンド',
+          data: [<%= @data["バックエンド"]["先々月"] || 0 %>, <%= @data["バックエンド"]["先月"] || 0 %>, <%= @data["バックエンド"]["今月"] || 0 %>],
+          backgroundColor: 'rgba(254, 178, 194, 0.7)',
+          borderColor: 'rgba(254, 178, 194, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'フロントエンド',
+          data: [<%= @data["フロントエンド"]["先々月"] || 0 %>, <%= @data["フロントエンド"]["先月"] || 0 %>, <%= @data["フロントエンド"]["今月"] || 0 %>],
+          backgroundColor: 'rgb(255, 207, 164, 0.7)',
+          borderColor: 'rgb(255, 207, 164, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'インフラ',
+          data: [<%= @data["インフラ"]["先々月"] || 0 %>, <%= @data["インフラ"]["先月"] || 0 %>, <%= @data["インフラ"]["今月"] || 0 %>],
+          backgroundColor: 'rgba(254, 229, 176, 0.7)',
+          borderColor: 'rgb(254, 229, 176, 1)',
+          borderWidth: 1
+        }
+      ]
+    };
+
+    const chartOptions = {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            stepSize: 10,
+            min: 0
           }
         }
       }
+    };
+
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: chartOptions
     });
   });
 </script>
