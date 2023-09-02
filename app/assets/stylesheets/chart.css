@@ -13,6 +13,12 @@
 }
 
 .chartbar-name {
+  margin: 50px auto 0;
   font-weight: bold;
   font-size: 0.5rem;
+}
+
+#myChart {
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
