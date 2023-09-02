@@ -44,7 +44,7 @@ Category.all.each do |category|
   Skill.create!(
     user_id: 1,
     category_id: category.id,
-    name: "ダミースキル（先月）#{category.name}",
+    name: "LastMonth(#{category.name})",
     skill_level: dummy_data["先月"] || 0,
     updated_at: 1.month.ago.beginning_of_month
   )
@@ -52,7 +52,7 @@ Category.all.each do |category|
   Skill.create!(
     user_id: 1,
     category_id: category.id,
-    name: "ダミースキル（先々月）#{category.name}",
+    name: "TwoMonthAgo(#{category.name})",
     skill_level: dummy_data["先々月"] || 0,
     updated_at: 2.months.ago.beginning_of_month
   )
