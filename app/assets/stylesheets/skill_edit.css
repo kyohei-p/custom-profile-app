@@ -6,12 +6,19 @@
 }
 
 .category-container {
-  margin: 0 auto 50px;
+  margin: 30px 50px;
+  margin-right: 200px;
   padding: 50px;
-  max-height: 300px; /* 例として300pxに設定 */
+  max-height: 300px;
 
   /* スクロールバーを表示 */
   overflow-y: auto;
+}
+
+@media screen and (max-width: 1164px) {
+  .category-container {
+    margin-right: 70px;
+  }
 }
 
 .scrollable {
@@ -25,16 +32,24 @@
 
 .category-area-and-button {
   display: flex;
-  justify-content: space-between;
+  justify-content:  flex-start;
 }
 
 .category-name {
   margin: auto;
+  /* margin-right: 325px; */
   font-weight: bold;
   font-size: 20px;
 }
 
+@media screen and (max-width: 1164px) {
+  .category-name {
+    margin: auto;
+    }
+}
+
 .add-skill-button, .back-button{
+  width: 210px;
   height: 50px;
   border: none;
   border-radius: 5px;
@@ -44,7 +59,26 @@
 }
 
 .back-button {
+  width: 260px!important;
   margin: 10px auto 20px;
+}
+
+@media screen and (min-width: 1165px){
+  .add-skill-button {
+    margin-left: 570px;
+  }
+}
+
+@media screen and (min-width: 951px) and (max-width: 1164px) {
+  .add-skill-button {
+    margin-left: 280px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .add-skill-button {
+    margin-left: 200px;
+  }
 }
 
 table, th, td {
@@ -52,8 +86,8 @@ table, th, td {
 }
 
 table {
+  width: 100%;
   padding-left: 30px;
-  padding-right: 30px;
   border: 1px solid #e8e8e8;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -70,6 +104,17 @@ td {
   position: relative;
   padding-right: 50px;
   border-top: 1px solid #e8e8e8;
+}
+
+td.level-tag-container{
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 1164px) {
+  td {
+    padding-right: 25px;
+  }
 }
 
 .skill-level-tag {
@@ -93,7 +138,7 @@ td {
 .triangle-arrow::before {
   content: "";
   position: absolute;
-  top: -4px;
+  /* top: -4px; */
   right: 20px;
   transform: translateY(-50%) rotate(180deg);
   border-left: 7px solid transparent;
@@ -101,12 +146,6 @@ td {
   border-bottom: 7px solid #757575;
 }
 
-@media screen and (max-width: 1164px) {
-  .triangle-arrow::before {
-    top: -38px;
-    right: -130px;
-  }
-}
 
 /* エスケープシーケンス&#9660;を使用した場合 */
 /* .triangle-arrow {
@@ -132,6 +171,15 @@ td {
   color: #00608d;
 }
 
+@media screen and (max-width: 1164px) {
+  .update-button{
+    width: 80px;
+    font-size: 5px;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+}
+
 .delete-button {
   width: 150px;
   border: 1px solid #ee6969;
@@ -139,4 +187,13 @@ td {
   padding: 5px 10px;
   background-color:#ee6969;
   color: #ffffff;
+}
+
+@media screen and (max-width: 1164px) {
+  .delete-button {
+    width: 65px;
+    font-size: 5px;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
 }

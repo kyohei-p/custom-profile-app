@@ -36,7 +36,7 @@
               <tr data-category-id="<%= category.id %>" data-skill-id="<%= skill.id %>" data-skill-name="<%= skill.name %>" data-skill-level="<%= skill.skill_level %>">
                 <td><%= skill.name %></td>
                 <%= form_tag category_skill_path(category, skill), method: :patch, id: "update-form", data: { turbo: false, turbolinks: false } do %>
-                  <td>
+                  <td class="level-tag-container">
                     <%= select_tag "skill[skill_level]", options_for_select([['選択してください', nil]] + (0..100).map { |num| [num.to_s, num] }, selected: skill.skill_level), class: "skill-level-tag", id: "skill_id_" + skill.id.to_s, data: { turbolinks: false } %>
                     <span class="triangle-arrow"></span>
                   </td>
