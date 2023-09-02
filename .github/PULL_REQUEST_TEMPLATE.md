@@ -1,6 +1,6 @@
 ## チケットへのリンク
 
-* https://example.com
+* https://prum.backlog.com/view/PRUM_ACADEMY-925
 
 ## やったこと
 
