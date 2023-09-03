@@ -58,7 +58,7 @@ production:
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  database: <%= ENV['DATABASE_NAME'] %>
+  username: tnxxuhirjdpdye9z
+  password: n5oqu44s4fijrh79
+  host: cis9cbtgerlk68wl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  database: z7ovmshjpk111icj
