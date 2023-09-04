@@ -32,7 +32,7 @@
 
 .category-area-and-button {
   display: flex;
-  justify-content:  flex-start;
+  justify-content:  space-between;
 }
 
 .category-name {
@@ -63,7 +63,7 @@
   margin: 10px auto 20px;
 }
 
-@media screen and (min-width: 1165px){
+/* @media screen and (min-width: 1165px){
   .add-skill-button {
     margin-left: 570px;
   }
@@ -79,7 +79,7 @@
   .add-skill-button {
     margin-left: 200px;
   }
-}
+} */
 
 table, th, td {
   padding: 8px;

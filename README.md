@@ -93,6 +93,43 @@ Finished in 1.14 seconds (files took 7.51 seconds to load)
 #### Rspec(Tips)
 - [Docker+RailsでRSpec導入〜トップページ表示確認テストの書き方まで](https://qiita.com/memomaruRey/items/a93e03eec2eb6e1a8443)
 
+#### デプロイに関するTips（Heroku）
+- [HerokuCLIより一部抜粋](https://devcenter.heroku.com/articles/heroku-cli)
+```
+##M1（ARM64対応）の場合
+bundle lock --add-platform x86_64-linux
+
+bundle install --without production
+
+heroku login
+
+##M1（ARM64対応）の場合
+curl -O https://cli-assets.heroku.com/heroku-arm64.tar.xz
+
+##M1（ARM64対応）の場合
+tar -xf heroku-arm64.tar.xz
+
+heroku --version
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+heroku create アプリ名
+
+git push heroku main
+
+heroku run rake db:create 
+
+heroku run rake db:migrate
+
+heroku run rake db:seed 
+
+heroku ps:scale web=1
+
+heroku open
+
+heroku logs --tail 
+```
+
 ### railsでtailwindcssを使用する場合（検討中）
 
 ```

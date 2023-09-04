@@ -103,6 +103,7 @@ h2{
 }
 
 .submit-button {
+  margin-top: 10px;
   border: none;
   border-radius: 5px;
   padding: 10px 50px;

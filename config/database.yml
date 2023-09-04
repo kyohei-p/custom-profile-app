@@ -55,7 +55,10 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: myapp_production
-  username: myapp
-  password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: tnxxuhirjdpdye9z
+  password: n5oqu44s4fijrh79
+  host: cis9cbtgerlk68wl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  database: z7ovmshjpk111icj
