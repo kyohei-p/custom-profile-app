@@ -14,12 +14,14 @@
 }
 
 .profile-image {
+  display: inline-block;
   border-radius: 50%;
   border: 0.5px solid #ccc;
 }
 
 .introduction-container {
   flex: 1;
+  margin-bottom: 50px;
   text-align: left;
 }
 
