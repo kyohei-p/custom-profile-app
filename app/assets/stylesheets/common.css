@@ -17,19 +17,23 @@ body{
 
 header {
   position: fixed;
-  width: 1440px;
+  width: 100%;
   height: 120px;
   padding: 0px 40px 0px 40px;
-  background-color: #00608d;
+  background-color: #1B5678;
   z-index: 99;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 40px auto;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
   line-height: 42.19px;
   font-size: 36px;
   font-weight: bold;
@@ -42,14 +46,14 @@ header {
 
 .login-button-container {
   margin-top:7px;
-  margin-right: 50px;
+  margin-right: 80px;
 }
 
 .login-button {
+  padding: 16px 40px 16px 40px;
   text-decoration: none;
   border-radius: 5px;
   background-color: white;
-  padding: 10px 20px;
   color: #6d6d6d;
 }
 
@@ -58,10 +62,10 @@ header {
 }
 
 .logout-button {
+  padding: 16px 40px 16px 40px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: white;
-  padding: 10px 20px;
   color: #6d6d6d;
 }
 
@@ -80,7 +84,7 @@ footer {
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: #00608d;
+  background-color: #1B5678;
 }
 
 .copyright {
@@ -108,7 +112,7 @@ h2{
   border: none;
   border-radius: 5px;
   padding: 10px 50px;
-  background-color: #00608d;
+  background-color: #1B5678;
   color: white;
 }
 

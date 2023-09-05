@@ -54,7 +54,7 @@
   border: none;
   border-radius: 5px;
   padding: 10px 50px;
-  background-color: #00608d;
+  background-color: #1B5678;
   color: white;
 }
 
@@ -164,11 +164,11 @@ td.level-tag-container{
 
 .update-button {
   width: 180px;
-  border: 1px solid #00608d;
+  border: 1px solid #1B5678;
   border-radius: 5px;
   padding: 5px 10px;
   background-color: white;
-  color: #00608d;
+  color: #1B5678;
 }
 
 @media screen and (max-width: 1164px) {
