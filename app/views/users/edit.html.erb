@@ -1,23 +1,24 @@
-<div class="profile-edit-container">
-  <h2>自己紹介を編集する</h2>
+<h2 class="profile-edit-h2">自己紹介を編集する</h2>
+<div class="profile-edit-form">
   <%= form_with(model: @user, local: true) do |f| %> 
-    <div class="field" data-turbo="false">
+    <div class="profile-edit-field" data-turbo="false">
       <%= label_tag :self_introduction, "自己紹介文", class: "label-tag" %><br />
       <%= f.text_area :self_introduction, autofocus: true, rows: 5, class: "text-area" %>
+      <p class="character-limit">50文字以上、200文字未満で入力してください</p>
       <% if @user.errors[:self_introduction].any? %>
         <div class="error-message">
           <%= raw(@user.errors[:self_introduction].join("<br>")) %>
         </div>
       <% end %>
     </div>
-    <div class="field" data-turbo="false">
+    <div class="image-field" data-turbo="false">
       <%= label_tag :self_introduction, "アバター画像", class: "label-tag" %><br />
-      <%= f.label :image, "画像ファイルを添付する", class: "image-input-btn" %>
-      <%= f.file_field :image, class: "image-form" %>
+      <%= f.label :image, "画像ファイルを添付する", class: "upload-button" %>
+      <%= f.file_field :image, class: "base-button" %>
     </div>
 
-    <div class="signin-actions">
-      <%= f.submit "自己紹介を確定する", class:"submit-button" %>
+    <div class="update-actions">
+      <%= f.submit "自己紹介を確定する", class:"edit-submit-button" %>
     </div>
   <% end %>
 </div>

@@ -1,8 +1,16 @@
 /* プロフィール編集ページ */
-.profile-edit-container {
-  text-align:center; 
-  max-width: 300px;
-  margin: 0 auto;
+.profile-edit-h2 {
+  margin: 0 auto 50px;
+  width: 324px;
+  height: 48px;
+  text-align: center;
+  font-size: 36px;
+}
+
+.profile-edit-form {
+  margin: auto;
+  width: 480px;
+  height: 145px;
 }
 
 .text-area {
@@ -13,25 +21,67 @@
   resize: none;
 }
 
+.character-limit {
+  width: max-content;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: gray;
+  text-align: left;
+}
 
-.image-input-btn{
-  display: block;
+.image-field {
+  position: relative;
+  margin: 30px auto;
+  width: 100%;
+  height: 48px;
+  gap:3px;
+}
+
+
+.upload-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #e5e5e5;
-  width: 150px;
-  height: 30px;
-  margin-top: 10px;
-  margin-left: 10px;
-  border-radius: 5px;
-  font-size: 0.7rem;
-  padding-top: 10px;
+  margin: 5px 0;
+  width: 202px;
+  height: 32px;
+  border-radius: 4px;
+  padding: 8px 24px 8px 24px;
+  font-size: 14px;
+  line-height: 16.41px;
   text-decoration: none;
   text-align: center;
 }
 
-.image-form{
-  display: none;
+.base-button {
+  position: absolute;
+  top: 28px;
+  z-index: -1;
+  width: 550px;
 }
 
-.signin-actions {
-  margin-top: 30px;
+input[type="file"]::file-selector-button {
+  width: 250px;
+  height: 50px;
+  border-radius: 4px;
+  padding: 8px 24px 8px 24px;
+  border: none;
+}
+
+.update-actions {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.edit-submit-button {
+  width: 322px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 80px 16px 80px;
+  background-color: #00608d;
+  color: white;
+  font-size: 18px;
 }
