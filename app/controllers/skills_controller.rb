@@ -2,9 +2,13 @@ class SkillsController < ApplicationController
   before_action :set_category_ids, only: [:edit, :new]
 
   def index
-    @category = Category.find(params[:category_id])
-    @skill = Skill.new
-    render :new
+    if user_signed_in?
+      @categories = Category.all
+      @skill = Skill.new
+      render :edit
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -31,7 +35,7 @@ class SkillsController < ApplicationController
   def edit
     if user_signed_in?
       @category = Category.find(params[:category_id])
-      @skill = Skill.with_deleted.find_by(id: params[:id])
+      @skill = Skill.find(params[:id])
       @categories = Category.all
       @skills = Skill.all
 
