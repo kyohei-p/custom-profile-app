@@ -16,7 +16,7 @@ body{
 }
 
 header {
-  background-color: #00608d;
+  background-color: #1B5678;
   width: 100%;
   padding: 30px;
   position: fixed;
@@ -79,7 +79,7 @@ footer {
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: #00608d;
+  background-color: #1B5678;
 }
 
 .copyright {
@@ -107,7 +107,7 @@ h2{
   border: none;
   border-radius: 5px;
   padding: 10px 50px;
-  background-color: #00608d;
+  background-color: #1B5678;
   color: white;
 }
 
