@@ -7,10 +7,10 @@ Rails.application.routes.draw do
 
   delete '/users/sign_out' => 'devise/sessions#destroy'
 
+  get '/skills', to: 'skills#index'
+
   resources :categories do
-    resources :skills do
-      get 'edit_skill', on: :member
-    end
+    resources :skills
   end
 
   resources :users

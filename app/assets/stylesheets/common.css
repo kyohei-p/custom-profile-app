@@ -84,7 +84,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1B5678;
+  height: 50px;
+  background-color: #00608d;
 }
 
 .copyright {

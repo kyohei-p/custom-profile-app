@@ -53,7 +53,7 @@
         const skillId = backButton.getAttribute("data-skill-id");
         // 現在のホスト（ドメイン）を取得
         const currentHost = window.location.host;
-        const editUrl = `http://${currentHost}/categories/${categoryId}/skills/${skillId}/edit`;
+        const editUrl = `http://${currentHost}/skills`;
 
         window.location.href = editUrl;
       });

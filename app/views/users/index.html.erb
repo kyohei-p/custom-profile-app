@@ -22,10 +22,7 @@
     <h2 class="chart-h2">スキルチャート</h2>
     <hr class="chart-underline">
     <div class="actions">
-      <% if @skills.any? %>
-        <% first_skill = @skills.first %>
-        <%= button_to "スキルを編集する", edit_category_skill_path(first_skill.category, first_skill), method: :get, data: { turbolinks: false }, class:"submit-button" %>
-      <% end %>
+      <%= button_to "スキルを編集する", skills_path, method: :get, data: { turbolinks: false }, class:"submit-button" %>
     </div>
     <p class="chartbar-name">Chart.js Bar Chart</p>
     <canvas id="myChart"></canvas>
