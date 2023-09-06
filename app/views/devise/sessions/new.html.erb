@@ -1,12 +1,12 @@
+<h2 class="login-h2">ログイン</h2>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <div class="login-container" data-turbo="false">
-  <h2>ログイン</h2>
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { "data-turbo": "false" }) do |f| %>
-    <div class="field" data-turbo="false">
+    <div class="login-fields" data-turbo="false">
       <%= label_tag :email, "メールアドレス", class:"label-tag" %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"login-field" %>
       <% if resource.errors[:email].any? %>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="actions" style="margin-top: 30px;" data-turbo="false">
-      <%= f.submit "ログインする", class: "submit-button" %>
+      <%= f.submit "ログインする", class: "login-submit-button" %>
     </div>
   <% end %>
 </div>

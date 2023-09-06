@@ -45,16 +45,16 @@ header {
 }
 
 .login-button-container {
-  margin-top:7px;
   margin-right: 80px;
 }
 
 .login-button {
   padding: 16px 40px 16px 40px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: white;
   color: #6d6d6d;
+  font-size: 18px;
 }
 
 .login-button:hover {
@@ -67,6 +67,7 @@ header {
   border-radius: 4px;
   background-color: white;
   color: #6d6d6d;
+  font-size: 18px;
 }
 
 .logout-button:hover {
@@ -85,7 +86,7 @@ footer {
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: #1B5678;
+  background-color: #00608d;
 }
 
 .copyright {
@@ -127,4 +128,5 @@ h2{
 
 .actions {
   margin-top: 10px;
+  text-align: center;
 }
