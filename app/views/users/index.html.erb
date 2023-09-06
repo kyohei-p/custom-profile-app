@@ -1,10 +1,10 @@
-<div class="main-container">
+<div class="wrapper">
   <div class="flex-container">
     <div class="image-container">
       <% if @user.image.attached? %>
         <%= image_tag @user.image, class:"profile-image", width: 200, height: 200 %>
       <% else %>
-        <div class="profile-image default-avatar" style="width: 200px; height: 200px; background-color: #ccc;"></div>
+        <div class="profile-image default-avatar" style="width: 360px; height: 360px; background-color: #ccc;"></div>
       <% end %>
     </div>
     <div class="introduction-container">
@@ -13,21 +13,24 @@
       <% @users.each do |user| %>
         <p class="introduction-text"><%= user.self_introduction %></p>
       <% end %>
-      <div class="actions">
-        <%= button_to "自己紹介を編集する", edit_user_path(current_user), method: :get, class:"submit-button" %>
+      <div class="top-profile-actions">
+        <%= button_to "自己紹介を編集する", edit_user_path(current_user), method: :get, class:"profile-edit-button" %>
       </div>
     </div>
   </div>
   <div class="chart-container">
-    <h2 class="chart-h2">スキルチャート</h2>
-    <hr class="chart-underline">
-    <div class="actions">
-      <%= button_to "スキルを編集する", skills_path, method: :get, data: { turbolinks: false }, class:"submit-button" %>
+    <div class="chart-items">
+      <h2 class="chart-h2">スキルチャート</h2>
+      <hr class="chart-underline">
+      <div class="actions">
+        <%= button_to "スキルを編集する", skills_path, method: :get, data: { turbolinks: false }, class:"skill-edit-button" %>
+      </div>
     </div>
     <p class="chartbar-name">Chart.js Bar Chart</p>
     <canvas id="myChart"></canvas>
   </div>
 </div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function(){
     const ctx = document.getElementById('myChart');

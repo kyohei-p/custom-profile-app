@@ -1,11 +1,14 @@
-.main-container {
-  margin: 50px;
+.wrapper {
+  width: 960px;
+  height: auto;
+  margin: 50px auto;
 }
 
 .flex-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 50px 0;
+  height: 360px;
 }
 
 .image-container {
@@ -20,15 +23,50 @@
 }
 
 .introduction-container {
-  flex: 1;
+  flex: 1.5;
+  margin-left: 80px;
   margin-bottom: 50px;
   text-align: left;
 }
 
 .introduction-h2 {
   margin-bottom: 0;
+  white-space: nowrap;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .introduction-text {
+  width: 521px;
+  height: 81px;
   padding-right: 100px;
+  font-size: 18px;
+}
+
+.top-profile-actions {
+  margin-top: 10px;
+}
+
+.profile-edit-button {
+  width: 242px;
+  height: 53px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: white;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.skill-edit-button {
+  width: 224px;
+  height: 53px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: white;
+  font-size: 18px;
+  white-space: nowrap;
 }

@@ -78,14 +78,13 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40px;
   }
 
 .footer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 40px;
   background-color: #00608d;
 }
 
@@ -112,18 +111,22 @@ h2{
 }
 
 .submit-button {
+  width: 224px;
+  height: 53px;
   margin-top: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 10px 50px;
   background-color: #1B5678;
   color: white;
+  font-size: 18px;
+  white-space: nowrap;
 }
 
 .underline {
-  border: 1px solid #7f7f7f;
+  border: 2px solid #7f7f7f;
   margin: 10px auto 30px 0;
-  width: 200px;
+  width: 240px;
 }
 
 .actions {
