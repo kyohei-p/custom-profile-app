@@ -1,27 +1,42 @@
 .addskill-container {
-  text-align:center;
-  max-width: 300px;
+  width: 480px;
+  height: 268px;
   margin: 0 auto;
 }
 
 .addskill-h2 {
+  width: 502px;
+  height: 48px;
+  margin: 25px auto 50px;
   font-weight: normal;
   text-align:center;
   white-space: nowrap;
+  font-size: 36px;
 }
+
+/* .addskill-field {
+  border: none;
+  margin-bottom: 15px;
+  width: 480px;
+  height: 268px;
+} */
 
 .addskill-text-field {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  width: 480px;
+  height: 36px;
+  margin-bottom: 15px;
   border: none;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 15px;
-  width: 300px;
+  font-size: 16px;
+  background-color: white;
 }
 
 .addskill-actions {
   margin-top: 10px;
+  text-align: center;
 }
 
 .triangle-arrow-addskill {
@@ -34,11 +49,11 @@
 .triangle-arrow-addskill::before {
   content: "";
   position: absolute;
-  top: -40px;
-  left: 280px;
+  top: -50px;
+  left: 460px;
   transform: translateY(-50%) rotate(180deg);
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
   border-bottom: 7px solid #757575;
 }
 
@@ -46,6 +61,6 @@
   width: max-content;
   margin-top: -30px;
   margin-bottom: 30px;
-  font-size: 0.9rem;
+  font-size: 12px;
   color: red;
 }
