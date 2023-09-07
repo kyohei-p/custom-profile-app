@@ -8,10 +8,11 @@
       </button>
   </div>
 </div>
+<h2 class="addskill-h2"><%= @category.name %>にスキルを追加</h2>
 <div class="addskill-container">
-  <h2 class="addskill-h2"><%= @category.name %>にスキルを追加</h2>
   <%= form_with(model: @category.skills.build, url: category_skills_path(@category)) do |f| %>
-    <div class="field" data-turbo="false" data-turbolinks="false">
+    <div class="addskill-field" data-turbo="false" data-turbolinks="false">
+
         <%= label_tag :name, "習得スキル名", class:"label-tag" %><br />
         <%= f.text_field :name, autocomplete: "name", id: "skill-name", class:"addskill-text-field" %><br />
         <p class="error-message name-error-message" data-turbo="false" data-turbolinks="false"></p>
@@ -21,7 +22,7 @@
         <p class="skill-level-error-message" data-turbo="false" data-turbolinks="false"></p>
     </div>
     <div class="addskill-actions" data-category-id="<%= @category.id %>">
-      <%= f.submit "スキルを追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
+      <%= f.submit "追加する", data: { turbo: false, turbolinks: false }, class:"submit-button" %>
     </div>
   <% end %>
 </div>

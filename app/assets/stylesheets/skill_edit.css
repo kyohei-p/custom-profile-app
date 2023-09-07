@@ -2,12 +2,14 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 50px auto;
+  width: 1440px;
+  height: 1548px;
 }
 
 .category-container {
+  width: 960px;
+  height: 436px;
   margin: 30px 50px;
-  margin-right: 200px;
   padding: 50px;
   max-height: 300px;
 
@@ -15,44 +17,42 @@
   overflow-y: auto;
 }
 
-@media screen and (max-width: 1164px) {
-  .category-container {
-    margin-right: 70px;
-  }
-}
-
 .scrollable {
   overflow-y: scroll;
 }
 
 .category-1, .category-2, .category-3 {
+  width: 880px;
+  height: 356px;
+  margin: 20px auto;
   border: 1px solid #929292;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .category-area-and-button {
   display: flex;
   justify-content:  space-between;
+  width: 880px;
+  height: 48px;
+}
+
+.category-area {
+  width: 240px;
+  height: 44px;
 }
 
 .category-name {
   margin: auto;
-  /* margin-right: 325px; */
   font-weight: bold;
-  font-size: 20px;
-}
-
-@media screen and (max-width: 1164px) {
-  .category-name {
-    margin: auto;
-    }
+  font-size: 24px;
+  line-height: 28.13px;
 }
 
 .add-skill-button, .back-button{
   width: 210px;
   height: 50px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 10px 50px;
   background-color: #1B5678;
   color: white;
@@ -63,74 +63,66 @@
   margin: 10px auto 20px;
 }
 
-/* @media screen and (min-width: 1165px){
-  .add-skill-button {
-    margin-left: 570px;
-  }
-}
-
-@media screen and (min-width: 951px) and (max-width: 1164px) {
-  .add-skill-button {
-    margin-left: 280px;
-  }
-}
-
-@media screen and (max-width: 950px) {
-  .add-skill-button {
-    margin-left: 200px;
-  }
-} */
-
-table, th, td {
-  padding: 8px;
-}
-
 table {
-  width: 100%;
-  padding-left: 30px;
+  width: 880px;
+  height: auto;
+  margin-top: 32px;
   border: 1px solid #e8e8e8;
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+}
+
+thead {
+  width: 880px;
+  height: 57px;
 }
 
 th {
-  padding-right: 50px;
+  width: 240px;
+  height: auto;
+  padding-left: 30px;
   white-space: nowrap;
   text-align: left;
   font-weight: normal;
 }
 
+tr {
+  width: 880px;
+  height: 73px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
 td {
   position: relative;
-  padding-right: 50px;
-  border-top: 1px solid #e8e8e8;
+  width: 240px;
+  height: 52px;
+  padding-left: 30px;
+  border-bottom: 1px solid #e8e8e8;
+  border-collapse: collapse;
 }
 
 td.level-tag-container{
-  display: flex;
-  align-items: center;
-}
-
-@media screen and (max-width: 1164px) {
-  td {
-    padding-right: 25px;
-  }
+  width: 240px;
+  height: 72px;
 }
 
 .skill-level-tag {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 150px;
+  width: 160px;
   height: 40px;
   padding: 0 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .triangle-arrow {
   position: relative;
   display: inline-block;
+  width: 24px;
+  height: auto;
   font-size: 12px;
   pointer-events: none;
 }
@@ -138,14 +130,13 @@ td.level-tag-container{
 .triangle-arrow::before {
   content: "";
   position: absolute;
-  /* top: -4px; */
-  right: 20px;
+  top: -5px;
+  right: 35px;
   transform: translateY(-50%) rotate(180deg);
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #757575;
 }
-
 
 /* エスケープシーケンス&#9660;を使用した場合 */
 /* .triangle-arrow {
@@ -163,37 +154,23 @@ td.level-tag-container{
 }
 
 .update-button {
-  width: 180px;
+  width: 172px;
+  height: 32px;
   border: 1px solid #1B5678;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 5px 10px;
   background-color: white;
   color: #1B5678;
-}
-
-@media screen and (max-width: 1164px) {
-  .update-button{
-    width: 80px;
-    font-size: 5px;
-    overflow-wrap: break-word;
-    white-space: normal;
-  }
+  font-size: 14px;
+  line-height: 16.41px;
 }
 
 .delete-button {
-  width: 150px;
+  width: 144px;
+  height: 32px;
   border: 1px solid #ee6969;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 5px 10px;
   background-color:#ee6969;
   color: #ffffff;
-}
-
-@media screen and (max-width: 1164px) {
-  .delete-button {
-    width: 65px;
-    font-size: 5px;
-    overflow-wrap: break-word;
-    white-space: normal;
-  }
 }

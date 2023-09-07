@@ -1,6 +1,5 @@
 .alert {
   color: red;
-  width: max-content;
-  padding: 5px 10px;
-  text-align: left;
+  margin: 30px;
+  text-align: center;
 }
