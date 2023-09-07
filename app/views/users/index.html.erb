@@ -2,7 +2,7 @@
   <div class="flex-container">
     <div class="image-container">
       <% if @user.image.attached? %>
-        <%= image_tag @user.image, class:"profile-image", width: 200, height: 200 %>
+        <%= image_tag @user.image, class:"profile-image", width: 360, height: 360 %>
       <% else %>
         <div class="profile-image default-avatar" style="width: 360px; height: 360px; background-color: #ccc;"></div>
       <% end %>
