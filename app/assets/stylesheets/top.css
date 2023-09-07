@@ -22,6 +22,12 @@
   border: 0.5px solid #ccc;
 }
 
+.profile-image.default-avatar {
+  width: 360px;
+  height: 360px;
+  background-color: #ccc;
+}
+
 .introduction-container {
   flex: 1.5;
   margin-left: 80px;

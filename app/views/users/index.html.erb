@@ -4,7 +4,7 @@
       <% if @user.image.attached? %>
         <%= image_tag @user.image, class:"profile-image", width: 360, height: 360 %>
       <% else %>
-        <div class="profile-image default-avatar" style="width: 360px; height: 360px; background-color: #ccc;"></div>
+        <div class="profile-image default-avatar"></div>
       <% end %>
     </div>
     <div class="introduction-container">
