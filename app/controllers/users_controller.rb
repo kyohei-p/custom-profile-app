@@ -41,6 +41,11 @@ class UsersController < ApplicationController
     def update
       @user = User.find(params[:id])
       puts params
+
+      if params[:user][:image].nil?
+        @user.image.purge
+      end
+
       if @user.update(user_params)
         redirect_to root_path
       else
