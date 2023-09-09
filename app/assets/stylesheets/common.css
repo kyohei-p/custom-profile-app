@@ -75,7 +75,8 @@ header {
 footer {
   position: absolute;
   bottom: 0;
-  width: 1540px;
+  width: 100%;
+  min-width: 1800px;
   }
 
 .footer-container {

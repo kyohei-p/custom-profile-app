@@ -13,8 +13,11 @@
     </div>
     <div class="image-field" data-turbo="false">
       <%= label_tag :self_introduction, "アバター画像", class: "label-tag" %><br />
-      <%= f.label :image, "画像ファイルを添付する", class: "upload-button" %>
-      <%= f.file_field :image, class: "base-button" %>
+      <%= f.label :image, "画像ファイルを添付する", class: "upload-button", for: "image-upload-field" %>
+      <%= f.file_field :image, class: "base-button", id: "image-upload-field" %>
+        <div id="image-preview-container">
+          <img id="image-preview" src="#" />
+        </div>
     </div>
 
     <div class="update-actions">
@@ -22,3 +25,47 @@
     </div>
   <% end %>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const contentElement = document.querySelector('.content');
+  const imagePreviewContainer = document.getElementById('image-preview-container');
+  const fileInput = document.getElementById('image-upload-field');
+  const imagePreview = document.getElementById('image-preview');
+
+  // コンテンツ要素の高さを1000pxに設定する関数
+  function setContentHeightTo1000px() {
+    contentElement.style.height = '1000px';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const imagePreview = document.getElementById('image-preview');
+    imagePreview.src = '<%= asset_path("default_avatar.png") %>';
+    imagePreview.style.width = '360px';
+    imagePreview.style.height = '360px';
+    imagePreview.style.border = '0.5px solid #ccc';
+    imagePreview.style.borderRadius = '50%';
+
+    setContentHeightTo1000px();
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        setContentHeightTo1000px();
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      imagePreview.src = 'app/assets/images/default_avatar.png';
+      setContentHeightTo1000px();
+    }
+  });
+});
+</script>
