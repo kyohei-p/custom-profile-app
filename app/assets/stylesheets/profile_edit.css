@@ -37,6 +37,12 @@
   gap:3px;
 }
 
+#image-preview {
+  width: 400px;
+  height: 300px;
+  margin: 20px auto;
+}
+
 
 .upload-button{
   display: flex;
@@ -70,7 +76,7 @@ input[type="file"]::file-selector-button {
 }
 
 .update-actions {
-  margin-top: 60px;
+  margin-top: 450px;
   text-align: center;
 }
 
