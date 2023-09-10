@@ -1,0 +1,57 @@
+.signup-form {
+  margin: auto;
+  width: 480px;
+  height: 145px;
+}
+
+.signup-h2 {
+  margin: 50px auto;
+  width: 324px;
+  height: 48px;
+  text-align: center;
+  font-size: 36px;
+}
+
+.signup-field {
+  border: none;
+  border-bottom: 1.5px solid #ccc;
+  width: 480px;
+  height: 38px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.minimum-length {
+  font-size: 12px;
+  color: gray;
+}
+
+.signup-actions {
+  margin-top: 400px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.signup-button {
+  width: 200px;
+  height: 53px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: white;
+}
+
+#error_explanation {
+  width: max-content;
+  color: red;
+}
+
+.error-explanation-h2 {
+  font-size: 20px;
+}
+
+.error-explanation-ul {
+  font-size: 16px;
+}
+

@@ -1,29 +1,100 @@
-<h2>Sign up</h2>
+<h2 class="signup-h2">新規登録</h2>
+<div class="signup-form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="field" data-turbo="false">
+      <%= label_tag :name, "名前", class:"label-tag" %>
+      <%= f.text_field :name, autofocus: true, class:"signup-field" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="field" data-turbo="false">
+      <%= f.label :email, class:"label-tag" %>
+      <%= f.email_field :email, autocomplete: "email", class:"signup-field" %>
+    </div>
+
+    <div class="field" data-turbo="false">
+      <%= f.label :password, class:"label-tag" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "signup-field" %>
+      <% if @minimum_password_length %>
+        <p class="minimum-length"><%= @minimum_password_length %> 文字以上で入力してください</p>
+      <% end %>
+    </div>
+
+    <div class="field" data-turbo="false">
+      <%= f.label :password_confirmation, class:"label-tag" %>
+      <%= f.password_field :password_confirmation, class: "signup-field" %>
+    </div>
+
+    <div class="field" data-turbo="false">
+        <%= label_tag :self_introduction, "自己紹介文", class: "label-tag" %>
+        <%= f.text_area :self_introduction, rows: 5, class: "text-area" %>
+        <p class="character-limit">50文字以上、200文字未満で入力してください</p>
+    </div>
+
+    <div class="image-field" data-turbo="false">
+      <%= label_tag :self_introduction, "アバター画像", class: "label-tag" %><br />
+      <%= f.label :image, "画像ファイルを添付する", class: "upload-button", for: "image-upload-field" %>
+      <%= f.file_field :image, class: "base-button", id: "image-upload-field" %>
+        <div id="image-preview-container">
+          <img id="image-preview" src="#" />
+        </div>
+    </div>
+
+    <div class="signup-actions">
+      <%= f.submit "新規登録", class:"signup-button" %>
+    </div>
+  <% end %>
+
+  <div class="transition-link">
+    <%= link_to "ログインに戻る", new_user_session_path, class: "custom-link" %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  const contentElement = document.querySelector('.content');
+  const imagePreviewContainer = document.getElementById('image-preview-container');
+  const fileInput = document.getElementById('image-upload-field');
+  const imagePreview = document.getElementById('image-preview');
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+  function setContentHeight() {
+    contentElement.style.height = '1400px';
 
-<%= render "devise/shared/links" %>
+    // バリデーションエラーが発生した場合の高さを設定
+    if (error_explanation) {
+      contentElement.style.height = '1600px';
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const imagePreview = document.getElementById('image-preview');
+    imagePreview.src = '<%= asset_path("default_avatar.png") %>';
+    imagePreview.style.width = '260px';
+    imagePreview.style.height = '260px';
+    imagePreview.style.border = '0.5px solid #ccc';
+    imagePreview.style.borderRadius = '50%';
+
+    setContentHeight();
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        setContentHeight();
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      imagePreview.src = 'app/assets/images/default_avatar.png';
+      setContentHeight();
+    }
+  });
+});
+</script>

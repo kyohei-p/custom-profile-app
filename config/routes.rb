@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 
   delete '/users/sign_out' => 'devise/sessions#destroy'
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
     resources :skills
   end
 
-  resources :users
+  resources :users, only: [:index, :show, :edit, :update] 
 end

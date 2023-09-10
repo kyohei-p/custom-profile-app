@@ -46,7 +46,9 @@
   width: 521px;
   height: 81px;
   padding-right: 100px;
+  padding-bottom: 20px;
   font-size: 18px;
+  word-wrap: break-word;
 }
 
 .top-profile-actions {

@@ -11,11 +11,11 @@ class UsersController < ApplicationController
         @data = {}
 
         @categories.each do |category|
-          skills = Skill.where(category_id: category.id)
+          sskills = @user.skills.where(category_id: category.id)
           monthly_skill_levels = {
-            "先々月" => skills.where(updated_at: 2.months.ago.beginning_of_month).sum(:skill_level),
-            "先月" => skills.where(updated_at: 1.months.ago.beginning_of_month).sum(:skill_level),
-            "今月" => skills.where(updated_at: Time.current.beginning_of_month..Time.current.end_of_month).sum(:skill_level)
+            "先々月" => @user.skills.where(updated_at: 2.months.ago.beginning_of_month).sum(:skill_level),
+            "先月" => @user.skills.where(updated_at: 1.months.ago.beginning_of_month).sum(:skill_level),
+            "今月" => @user.skills.where(updated_at: Time.current.beginning_of_month..Time.current.end_of_month).sum(:skill_level)
           }
 
           @data[category.name] = monthly_skill_levels
