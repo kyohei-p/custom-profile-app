@@ -132,3 +132,18 @@ h2{
   margin-top: 10px;
   text-align: center;
 }
+
+.transition-link {
+  text-align: center;
+}
+
+.custom-link {
+  font-size: 12px;
+  color: #1B5678;
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  color: black;
+  text-decoration: none;
+}

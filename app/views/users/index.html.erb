@@ -10,8 +10,8 @@
     <div class="introduction-container">
       <h2 class="introduction-h2">自己紹介</h2>
       <hr class="underline">
-      <% @users.each do |user| %>
-        <p class="introduction-text"><%= user.self_introduction %></p>
+      <% if @user == current_user %>
+        <p class="introduction-text"><%= @user.self_introduction %></p>
       <% end %>
       <div class="top-profile-actions">
         <%= button_to "自己紹介を編集する", edit_user_path(current_user), method: :get, class:"profile-edit-button" %>

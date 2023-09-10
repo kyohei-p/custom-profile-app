@@ -4,16 +4,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     build_resource({})
     yield resource if block_given?
+    @custom_message = "ログインに戻る"
     respond_with resource
   end
 
   def create
     super
+    binding.pry 
+      # バリデーションエラー時にフォームを再表示
+      # redirect_to new_user_registration_path
   end
 
   private
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute1, :attribute2])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :self_introduction, :image])
   end
 end
