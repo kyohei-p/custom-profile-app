@@ -57,3 +57,38 @@ Category.all.each do |category|
     updated_at: 2.months.ago.beginning_of_month
   )
 end
+
+work1 = Work.create!(user_id: 1, title: "sample1", description: "これはサンプル作品１です。", website_url: "https://github.com/kyohei-p/laravel-todo")
+work2 = Work.create!(user_id: 1, title: "sample2", description: "これはサンプル作品２です。", website_url: "https://github.com/kyohei-p/my-Portfolio2021")
+work3 = Work.create!(user_id: 1, title: "sample3", description: "これはサンプル作品3です。", website_url: "https://github.com/kyohei-p/uber-eats-like-app")
+
+work1.image.attach(io: File.open('app/assets/images/todo-app.png'), filename: 'todo-app.png', content_type: 'image/png')
+work2.image.attach(io: File.open('app/assets/images/kyohei-portfolio2021.png'), filename: 'kyohei-portfolio2021.png', content_type: 'image/png')
+work3.image.attach(io: File.open('app/assets/images/uber-eats-like-app.png'), filename: 'uber-eats-like-app.png', content_type: 'image/png')
+
+
+Language.create!(name: "Ruby")
+Language.create!(name: "Rails")
+Language.create!(name: "PHP")
+Language.create!(name: "Laravel")
+Language.create!(name: "CakePHP")
+Language.create!(name: "HTML")
+Language.create!(name: "CSS")
+Language.create!(name: "Javascript")
+Language.create!(name: "TypeScript")
+Language.create!(name: "React")
+Language.create!(name: "Vue")
+Language.create!(name: "Nuxt.js")
+Language.create!(name: "Angular")
+Language.create!(name: "Next.js")
+Language.create!(name: "Java")
+Language.create!(name: "Spring")
+Language.create!(name: "Python")
+Language.create!(name: "Django")
+Language.create!(name: "Flask")
+Language.create!(name: "Perl")
+Language.create!(name: "Go")
+Language.create!(name: "Swift")
+Language.create!(name: "Kotlin")
+Language.create!(name: "C#")
+
