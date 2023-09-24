@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     resources :skills
   end
 
-  resources :users, only: [:index, :show, :edit, :update] 
+  resources :users, only: [:index, :show, :edit, :update]
+
+  resources :works do
+    resources :languages
+  end
 end

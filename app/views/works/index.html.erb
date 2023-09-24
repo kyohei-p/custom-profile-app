@@ -1,0 +1,36 @@
+<div class="works-index-container">
+  <h2 class="work-apps-h2">作成アプリ一覧</h2>
+  <div class="actions">
+    <%= button_to "作成したアプリを追加する", works_path, method: :get, data: { turbolinks: false }, class:"work-add-button" %>
+  </div>
+  <div class="work-card">
+    <% @works.each do |work| %>
+      <div class="work-item">
+        <% if work.image.attached? %>
+          <%= link_to work.website_url, target: "_blank", class: "website-link" do %>
+            <%= image_tag work.image, class:"work-index-thumbnail" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "noimage.png", class: "work-index-thumbnail" %>
+        <% end %>
+        <div class="card-text">
+          <%= link_to work.website_url, target: "_blank", class: "website-link" do %>
+            <p class="title-text">タイトル：<%= work.title %></p>
+          <% end %>
+          <p class="description-text">説明：<%= work.description %></p>
+        </div>
+        <div class="button-field">
+          <div class="button-field-actions">
+            <%= button_to "編集する", root_path, method: :get, data: { turbolinks: false }, class:"work-update-button" %>
+          </div>
+          <div class="button-field-actions">
+            <%= button_to "削除する", root_path, method: :get, data: { turbolinks: false }, class:"work-delete-button" %>
+          </div>
+        </div>
+     </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= button_to "トップページに戻る", root_path, method: :get, data: { turbolinks: false } %>
+  </div>
+</div>

@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
           @data[category.name] = monthly_skill_levels
         end
+        @works_images = Work.includes(:image_attachment).where.not(active_storage_attachments: { id: nil })
       else
         redirect_to new_user_session_path
       end

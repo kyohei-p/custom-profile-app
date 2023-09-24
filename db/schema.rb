@@ -47,8 +47,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_112122) do
 
   create_table "languages", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.bigint "work_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["work_id"], name: "index_languages_on_work_id"
   end
 
   create_table "skills", charset: "utf8mb4", force: :cascade do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_112122) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "languages", "works"
   add_foreign_key "skills", "categories"
   add_foreign_key "skills", "users"
   add_foreign_key "works", "users"
