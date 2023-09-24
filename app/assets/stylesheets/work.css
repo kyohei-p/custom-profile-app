@@ -1,0 +1,159 @@
+.work-container {
+  margin: 50px auto;
+  height: 300px;
+  text-align: center;
+}
+
+.work-h2 {
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.work-underline {
+  width: 400px;
+  margin: 10px auto 30px;
+  border: 2px solid #7f7f7f;
+}
+
+.work-index-button {
+  width: 250px;
+  height: 53px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: white;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.work-thumbnail-container {
+  display: inline-block;
+  justify-content: center;
+  margin: 50px auto;
+}
+
+.work-thumbnail {
+  width: 200px;
+  height: 100px;
+  margin: auto 20px;
+  border: 0.5px solid #7f7f7f;
+  border-radius: 4px;
+}
+
+.works-index-container {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.work-apps-h2 {
+  margin: 30px auto;
+  width: 324px;
+  height: 48px;
+  text-align: center;
+  font-size: 36px;
+}
+
+.work-add-button {
+  width: 250px;
+  height: 53px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1B5678;
+  color: white;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.work-index-thumbnail {
+  width: 300px;
+  height: 200px;
+  margin: auto 20px;
+  border: 0.5px solid #7f7f7f;
+  border-radius: 4px;
+}
+
+.work-index-thumbnail:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s;
+}
+
+.work-card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+.work-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 30px 10px;
+}
+
+.card-text {
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.title-text {
+  text-align: center;
+}
+
+.website-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.website-link:hover {
+  text-decoration: underline;
+}
+
+.description-text {
+  white-space: normal !important;
+  overflow: hidden !important;
+  max-width: 270px;
+  text-align: left;
+}
+
+.button-field {
+  display: flex;
+  margin: 10px;
+  height: 10%;
+}
+
+.button-field-actions {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 10%;
+}
+
+.work-update-button {
+  width: 120px;
+  height: 32px;
+  border: 1px solid #1B5678;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: white;
+  color: #1B5678;
+  font-size: 14px;
+  line-height: 16.41px;
+}
+
+.work-delete-button {
+  width: 120px;
+  height: 32px;
+  border: 1px solid #ee6969;
+  border-radius: 4px;
+  margin-left: 20px;
+  padding: 5px 10px;
+  background-color:#ee6969;
+  color: #ffffff;
+}

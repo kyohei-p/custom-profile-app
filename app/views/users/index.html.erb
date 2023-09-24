@@ -18,6 +18,23 @@
       </div>
     </div>
   </div>
+  <div class="work-container">
+    <h2 class="work-h2">作成アプリ</h2>
+    <hr class="work-underline">
+    <div class="actions">
+      <%= button_to "作成したアプリ一覧を見る", works_path, method: :get, data: { turbolinks: false }, class:"work-index-button" %>
+    </div>
+    <div class="work-thumbnail-container">
+      <% @works_images.each do |work| %>
+        <% if work.image.attached? %>
+          <%= image_tag work.image, class:"work-thumbnail" %>
+        <% else %>
+          <p>作成したアプリがありません</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="chart-container">
     <div class="chart-items">
       <h2 class="chart-h2">スキルチャート</h2>
